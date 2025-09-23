@@ -10,18 +10,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Particle.js will be included via CDN in the script section -->
+    <!-- tsParticles -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.3.4/tsparticles.bundle.min.js"></script>
     <style>
         :root {
             --deep-blue: #003366;
             --emerald-green: #006633;
             --light-beige: #f5f5dc;
+            --accent-gold: #D4AF37;
         }
         
         body {
             font-family: 'Open Sans', sans-serif;
             color: #333;
             padding-top: 80px;
+            line-height: 1.6;
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -33,6 +36,7 @@
             background-color: var(--deep-blue);
             padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
         
         .navbar-brand {
@@ -44,45 +48,72 @@
         .nav-link {
             color: rgba(255, 255, 255, 0.85) !important;
             font-weight: 500;
-            margin: 0 10px;
+            margin: 0 5px;
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .nav-link:hover {
             color: white !important;
-            transform: translateY(-2px);
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--emerald-green);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
         }
         
         .btn-primary {
             background-color: var(--emerald-green);
             border-color: var(--emerald-green);
+            padding: 10px 25px;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
             background-color: #005a2d;
             border-color: #005a2d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 51, 0.3);
         }
         
         .btn-outline-primary {
             color: var(--emerald-green);
             border-color: var(--emerald-green);
+            padding: 10px 25px;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
         }
         
         .btn-outline-primary:hover {
             background-color: var(--emerald-green);
             color: white;
+            transform: translateY(-2px);
         }
         
         .hero-section {
-            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 102, 51, 0.7)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 102, 51, 0.8)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 120px 0;
+            padding: 150px 0 120px;
             position: relative;
+            overflow: hidden;
         }
         
-        .particles-js {
+        #tsparticles {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -95,14 +126,22 @@
             z-index: 10;
         }
         
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
         .section-padding {
-            padding: 80px 0;
+            padding: 100px 0;
         }
         
         .section-title {
             position: relative;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             padding-bottom: 15px;
+            font-size: 2.5rem;
         }
         
         .section-title:after {
@@ -110,9 +149,10 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 60px;
-            height: 3px;
+            width: 80px;
+            height: 4px;
             background-color: var(--emerald-green);
+            border-radius: 2px;
         }
         
         .center-title:after {
@@ -121,23 +161,29 @@
         }
         
         .focus-card {
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             height: 100%;
             border: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            background: white;
         }
         
         .focus-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         
         .focus-card .card-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--emerald-green);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .focus-card:hover .card-icon {
+            transform: scale(1.1);
         }
         
         .values-section {
@@ -146,42 +192,115 @@
         
         .value-box {
             text-align: center;
-            padding: 30px;
+            padding: 40px 30px;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
             height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .value-box:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--deep-blue), var(--emerald-green));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .value-box:hover:before {
+            transform: scaleX(1);
         }
         
         .value-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
         
         .value-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--deep-blue);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .value-box:hover .value-icon {
+            color: var(--emerald-green);
+            transform: rotateY(180deg);
         }
         
         .pledge-section {
-            background: linear-gradient(rgba(0, 51, 102, 0.9), rgba(0, 51, 102, 0.9)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(rgba(0, 51, 102, 0.92), rgba(0, 51, 102, 0.92)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: white;
+            position: relative;
+        }
+        
+        .pledge-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300592d' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
         }
         
         .program-card {
-            border-left: 4px solid var(--emerald-green);
-            padding-left: 20px;
+            border-left: 5px solid var(--emerald-green);
+            padding: 25px 20px 25px 25px;
             margin-bottom: 30px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            background: white;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .program-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 102, 51, 0.03), transparent);
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .program-card:hover:before {
+            opacity: 1;
         }
         
         .program-card:hover {
             transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .program-card h4 {
+            position: relative;
+            z-index: 1;
+            color: var(--deep-blue);
+            margin-bottom: 10px;
+        }
+        
+        .program-card p {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0;
         }
         
         .team-member {
@@ -190,25 +309,43 @@
         }
         
         .team-img {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border: 5px solid var(--light-beige);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .team-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
         footer {
             background-color: var(--deep-blue);
             color: white;
-            padding: 60px 0 30px;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--emerald-green), var(--accent-gold));
         }
         
         .footer-links h5 {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+            font-weight: 600;
         }
         
         .footer-links h5:after {
@@ -216,9 +353,10 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 40px;
-            height: 2px;
+            width: 50px;
+            height: 3px;
             background-color: var(--emerald-green);
+            border-radius: 2px;
         }
         
         .footer-links ul {
@@ -227,11 +365,19 @@
         }
         
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links li i {
+            margin-right: 10px;
+            color: var(--emerald-green);
+            width: 20px;
         }
         
         .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             transition: all 0.3s ease;
         }
@@ -242,16 +388,17 @@
         }
         
         .social-icons a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border-radius: 50%;
-            margin-right: 10px;
+            margin-right: 15px;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
         
         .social-icons a:hover {
@@ -260,31 +407,170 @@
         }
         
         .copyright {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 25px;
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
         }
         
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: var(--emerald-green);
             color: white;
             border-radius: 50%;
             display: none;
             z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
+            text-decoration: none;
         }
         
         .back-to-top:hover {
             background: var(--deep-blue);
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--emerald-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h5 {
+            margin-bottom: 5px;
+            color: var(--deep-blue);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-padding {
+                padding: 70px 0;
+            }
+            
+            .hero-section {
+                padding: 120px 0 80px;
+            }
+            
+            .navbar-nav {
+                text-align: center;
+                padding-top: 15px;
+            }
+            
+            .nav-link {
+                margin: 5px 0;
+            }
+            
+            .program-card {
+                padding: 20px 15px 20px 20px;
+            }
+        }
+        
+        /* Form styling */
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--emerald-green);
+            box-shadow: 0 0 0 0.2rem rgba(0, 102, 51, 0.15);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--deep-blue);
+        }
+        
+        /* Animation for cards on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Focus area icons */
+        .focus-area-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 102, 51, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--emerald-green);
+            font-size: 1.8rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .focus-area-item:hover .focus-area-icon {
+            background: var(--emerald-green);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        .focus-area-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .focus-area-item:hover {
+            background: rgba(0, 102, 51, 0.03);
+            transform: translateY(-5px);
+        }
+        
+        .focus-area-content {
+            flex: 1;
+        }
+        
+        .focus-area-content h4 {
+            color: var(--deep-blue);
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -293,8 +579,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiByeD0iNCIgZmlsbD0iIzAwNjYzMyIvPgo8cGF0aCBkPSJNNy41IDdIMjIuNVYyMkg3LjVWNyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0xMi41IDE3LjVMMTUgMjBMMTcuNSAxNy41IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPHBhdGggZD0iTTE1IDdWMjAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K" alt="CAGAD Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
-                CAGAD
+                <img src="logo.png" alt="CAGAD Logo" width="90" height="70" class="d-inline-block align-text-top me-2">
+                
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -314,13 +600,13 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Particles -->
+    <!-- Hero Section with tsParticles -->
     <section id="home" class="hero-section">
-        <div id="particles-js"></div>
+        <div id="tsparticles"></div>
         <div class="container hero-content">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="display-4 fw-bold mb-4">Advancing Governance and Development in Africa</h1>
+                    <h1 class="hero-title">Advancing Governance and Development in Africa</h1>
                     <p class="lead mb-5">An independent, non-governmental, non-profit think tank focused on advancing good governance, accountability, security, and development in Nigeria and Africa.</p>
                     <a href="#about" class="btn btn-lg btn-primary me-3">Learn More</a>
                     <a href="#join" class="btn btn-lg btn-outline-light">Get Involved</a>
@@ -333,20 +619,20 @@
     <section id="about" class="section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6 fade-in">
                     <h2 class="section-title">About CAGAD</h2>
                     <p>The Centre for Advancement of Governance and Development (CAGAD) is an independent, non-governmental, non-profit, non-partisan, and research-centered think tank focused on advancing good governance, accountability, security, and development in Nigeria and Africa through evidence-based research, policy analysis, advocacy for transparency and accountability in governance, policy advisory, and civic and stakeholder engagement.</p>
                     <p>We seek to promote bold ideas and inspire sustainable solutions that will address Nigeria and Africa's most pressing governance, security and development challenges.</p>
                     <div class="mt-5">
                         <h3 class="mb-4">Our Vision</h3>
                         <div class="d-flex">
-                            <i class="fas fa-eye me-4 mt-2 text-primary"></i>
+                            <i class="fas fa-eye me-4 mt-2 text-primary fa-2x"></i>
                             <p>Our vision is to become Nigeria and Africa's leading think tank, driving impactful change in advancing good governance, accountability, improved security, and sustainable development through research, policy dialogue, capacity-building, civic education and awareness, technological innovation, and multi-stakeholder engagement.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CAGAD Team Discussion" class="img-fluid rounded shadow">
+                <div class="col-lg-6 fade-in">
+                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CAGAD Team Discussion" class="img-fluid rounded shadow-lg">
                 </div>
             </div>
         </div>
@@ -356,10 +642,9 @@
     <section class="section-padding bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-lg-10 mx-auto fade-in">
                     <h2 class="section-title center-title text-center">Our Mission</h2>
-                    <p class="text-center lead">CAGAD's mission is to promote responsive governance, strengthen public leadership accountability, foster peacebuilding, and improve human security and inclusive development through research, civic and stakeholder engagements, capacity building, and policy advocacy and advisory services.</p>
-                    <p class="text-center">We do this by expanding citizens' and stakeholders' understanding of best governance practices and the impacts of policies on development and providing long-term solutions to challenges through cutting-edge policy research, policy advisory, advocacy, roundtables, and nonpartisan engagement and dialogue.</p>
+                    <p class="text-center lead mb-4">CAGAD's mission is to promote responsive governance, strengthen public leadership accountability, foster citizens' participation in governance, improve human security and sustainable development through evidence-based research, civic and stakeholder engagements, policy advocacy and advisory.</p>
                 </div>
             </div>
         </div>
@@ -370,7 +655,7 @@
         <div class="container">
             <h2 class="section-title center-title text-center mb-5">Our Values</h2>
             <div class="row">
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="value-box">
                         <div class="value-icon">
                             <i class="fas fa-star"></i>
@@ -379,7 +664,7 @@
                         <p>We strive for the highest quality in all our research, analysis, and recommendations.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="value-box">
                         <div class="value-icon">
                             <i class="fas fa-balance-scale"></i>
@@ -388,7 +673,7 @@
                         <p>We maintain impartiality and do not align with any political party or ideology.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="value-box">
                         <div class="value-icon">
                             <i class="fas fa-shield-alt"></i>
@@ -397,7 +682,7 @@
                         <p>We uphold the highest ethical standards in all our activities and relationships.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="value-box">
                         <div class="value-icon">
                             <i class="fas fa-users"></i>
@@ -406,7 +691,7 @@
                         <p>We ensure diverse voices and perspectives are represented in our work.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="value-box">
                         <div class="value-icon">
                             <i class="fas fa-binoculars"></i>
@@ -415,7 +700,7 @@
                         <p>We are open about our methods, funding, and decision-making processes.</p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="value-box">
                         <div class="value-icon">
                             <i class="fas fa-crosshairs"></i>
@@ -425,8 +710,8 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-5">
-                <p class="fw-bold">Our values are encapsulated in the acronym: <span class="text-primary">ENIITO</span></p>
+            <div class="text-center mt-5 fade-in">
+                <p class="fw-bold h5">Our values are encapsulated in the acronym: <span class="text-primary">ENIITO</span></p>
             </div>
         </div>
     </section>
@@ -435,11 +720,11 @@
     <section class="pledge-section section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-10 mx-auto">
+                <div class="col-lg-10 mx-auto fade-in">
                     <h2 class="section-title center-title text-center text-white mb-5">CAGAD Pledge</h2>
                     <blockquote class="blockquote text-center">
-                        <p class="mb-4">"I commit myself to furthering the cause of justice, equity, fairness, accountability, and good governance in my country. I stand courageously to identify and question anyone or group engaging in behaviour that contributes to inequity, injustice, prejudice, and impunity, including abuse of power, privileges, unaccountability, and misgovernance. I also accept the constructive and civil critique of others to ensure I maintain my commitment to equity, fairness, and collective good above personal good, despite temptations to do otherwise. I pledge myself to the service of others, irrespective of their background, and do all in my power to be a good leader in advancing better governance, accountability, and development in my country, Africa, and the world. So help me God."</p>
-                        <footer class="blockquote-footer text-light">CAGAD Honor Code</footer>
+                        <p class="mb-4 fs-5">"I commit myself to furthering the cause of justice, equity, fairness, accountability, and good governance in my country. I stand courageously to identify and question anyone or group engaging in behaviour that contributes to inequity, injustice, prejudice, and impunity, including abuse of power, privileges, unaccountability, and misgovernance. I also accept the constructive and civil critique of others to ensure I maintain my commitment to equity, fairness, and collective good above personal good, despite temptations to do otherwise. I pledge myself to the service of others, irrespective of their background, and do all in my power to be a good leader in advancing better governance, accountability, and development in my country, Africa, and the world. So help me God."</p>
+                        <footer class="blockquote-footer text-light mt-4">CAGAD Honor Code</footer>
                     </blockquote>
                 </div>
             </div>
@@ -451,9 +736,9 @@
         <div class="container">
             <h2 class="section-title center-title text-center mb-5">Our Work</h2>
             <div class="row">
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="focus-card card h-100">
-                        <div class="card-body text-center p-4">
+                        <div class="card-body text-center p-5">
                             <div class="card-icon">
                                 <i class="fas fa-search"></i>
                             </div>
@@ -462,9 +747,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="focus-card card h-100">
-                        <div class="card-body text-center p-4">
+                        <div class="card-body text-center p-5">
                             <div class="card-icon">
                                 <i class="fas fa-briefcase"></i>
                             </div>
@@ -473,9 +758,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="focus-card card h-100">
-                        <div class="card-body text-center p-4">
+                        <div class="card-body text-center p-5">
                             <div class="card-icon">
                                 <i class="fas fa-bullhorn"></i>
                             </div>
@@ -484,9 +769,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="focus-card card h-100">
-                        <div class="card-body text-center p-4">
+                        <div class="card-body text-center p-5">
                             <div class="card-icon">
                                 <i class="fas fa-comments"></i>
                             </div>
@@ -495,9 +780,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="focus-card card h-100">
-                        <div class="card-body text-center p-4">
+                        <div class="card-body text-center p-5">
                             <div class="card-icon">
                                 <i class="fas fa-handshake"></i>
                             </div>
@@ -506,9 +791,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 fade-in">
                     <div class="focus-card card h-100">
-                        <div class="card-body text-center p-4">
+                        <div class="card-body text-center p-5">
                             <div class="card-icon">
                                 <i class="fas fa-users"></i>
                             </div>
@@ -526,57 +811,61 @@
         <div class="container">
             <h2 class="section-title center-title text-center mb-5">Focus Areas</h2>
             <div class="row">
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="d-flex align-items-start">
-                        <i class="fas fa-landmark me-4 mt-2 text-primary fa-2x"></i>
-                        <div>
+                <div class="col-lg-6 fade-in">
+                    <div class="focus-area-item">
+                        <div class="focus-area-icon">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+                        <div class="focus-area-content">
                             <h4>Governance</h4>
                             <p>Strengthening public leadership integrity, accountability and institutional credibility.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="d-flex align-items-start">
-                        <i class="fas fa-scale-balanced me-4 mt-2 text-primary fa-2x"></i>
-                        <div>
+                    <div class="focus-area-item">
+                        <div class="focus-area-icon">
+                            <i class="fas fa-scale-balanced"></i>
+                        </div>
+                        <div class="focus-area-content">
                             <h4>Accountability</h4>
                             <p>Promoting transparency and accountability in governance processes and public expenditure.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="d-flex align-items-start">
-                        <i class="fas fa-shield-alt me-4 mt-2 text-primary fa-2x"></i>
-                        <div>
+                    <div class="focus-area-item">
+                        <div class="focus-area-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="focus-area-content">
                             <h4>Security</h4>
                             <p>Addressing human security gaps and improving safety and stability across communities.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="d-flex align-items-start">
-                        <i class="fas fa-vote-yea me-4 mt-2 text-primary fa-2x"></i>
-                        <div>
+                <div class="col-lg-6 fade-in">
+                    <div class="focus-area-item">
+                        <div class="focus-area-icon">
+                            <i class="fas fa-vote-yea"></i>
+                        </div>
+                        <div class="focus-area-content">
                             <h4>Democracy</h4>
-                            <p>Deepening democratic consolidation and fostering citizen participation in governance.</p>
+                            <p>Deepening democratic consolidation, monitoring democratic stability, and fostering citizen participation in governance.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="d-flex align-items-start">
-                        <i class="fas fa-dove me-4 mt-2 text-primary fa-2x"></i>
-                        <div>
+                    <div class="focus-area-item">
+                        <div class="focus-area-icon">
+                            <i class="fas fa-dove"></i>
+                        </div>
+                        <div class="focus-area-content">
                             <h4>Peacebuilding</h4>
-                            <p>Fostering peacebuilding and conflict resolution in fragile or transition contexts.</p>
+                            <p>Fostering peacebuilding, conflict resolution and stability in fragile or transition contexts.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="d-flex align-items-start">
-                        <i class="fas fa-seedling me-4 mt-2 text-primary fa-2x"></i>
-                        <div>
+                    <div class="focus-area-item">
+                        <div class="focus-area-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="focus-area-content">
                             <h4>Sustainable Development</h4>
-                            <p>Advocating for inclusive development that meets the needs of present and future generations.</p>
+                            <p>Promoting the SDGs, monitoring progress, and advocating for inclusive and sustainable development that meets the needs of present and future generations.</p>
                         </div>
                     </div>
                 </div>
@@ -589,40 +878,68 @@
         <div class="container">
             <h2 class="section-title center-title text-center mb-5">Our Programmes</h2>
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6 fade-in">
+                    <div class="program-card">
+                        <h4>Elections Credibility Monitoring</h4>
+                        <p>Monitoring the credibility of elections in Nigeria and Africa, and providing independent, evidence-based, and non-partisan assessments of elections and electoral processes at regional, national and subnational levels.</p>
+                    </div>
+                    <div class="program-card">
+                        <h4>Democracy Monitoring Programme</h4>
+                        <p>Tracking the health of democracy in Nigeria and Africa by monitoring trends in constitutional governance, the rule of law, civic freedom, civil liberties, democratic institutions, and citizens' participation in governance.</p>
+                    </div>
+                    <div class="program-card">
+                        <h4>Accountability Monitoring Programme</h4>
+                        <p>Monitoring and tracking government performance, transparent budgeting, fiscal responsibility, service delivery on promises, anti-corruption initiatives and evidence for abuse of office, public trust and institutional credibility.</p>
+                    </div>
+                    <div class="program-card">
+                        <h4>Security Monitoring Programme</h4>
+                        <p>Monitoring and tracking security incidents, analysing conflict and insecurity trends, including terrorism, violent extremism, organised crime, and communal violence, providing early warning, conflict mapping, policy briefs, and advisory guides for governments, institutions, communities, and security actors.</p>
+                    </div>
+                    <div class="program-card">
+                        <h4>Civic Engagement Programme</h4>
+                        <p>Building platforms and tools for citizens' engagement, including youth, women, and underrepresented groups, to effectively participate in governance processes, drive change, and co-create solutions.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in">
                     <div class="program-card">
                         <h4>Central Africa Programme</h4>
-                        <p>Focusing on governance and development challenges in Central African countries.</p>
+                        <p>Focusing on political, economic, and social developments across the Central African subregion.</p>
                     </div>
                     <div class="program-card">
                         <h4>East Africa Programme</h4>
-                        <p>Addressing regional issues and promoting cooperation in East African nations.</p>
+                        <p>Analysing and providing independent assessment on political, economic, and social developments across the East African subregion.</p>
                     </div>
                     <div class="program-card">
                         <h4>North Africa Programme</h4>
-                        <p>Analyzing and providing solutions for governance challenges in North Africa.</p>
+                        <p>Driving independent thinking, analysing, and evaluating political, economic, and social developments in the North African region.</p>
                     </div>
                     <div class="program-card">
                         <h4>Sahel Programme</h4>
-                        <p>Addressing security and development issues in the Sahel region.</p>
+                        <p>Monitoring, assessing and evaluating political, economic, and social developments across the Sahel region, including broader regional integration, geopolitical dynamics, political stability, and regional and international relations with a particular focus on the Alliance of Sahel States.</p>
                     </div>
-                </div>
-                <div class="col-lg-6">
                     <div class="program-card">
                         <h4>Southern Africa Programme</h4>
-                        <p>Promoting democratic governance and development in Southern Africa.</p>
+                        <p>Focusing on political, economic, and social developments across the Southern African subregion.</p>
                     </div>
                     <div class="program-card">
                         <h4>West Africa Programme</h4>
-                        <p>Focusing on regional integration and governance in West African states.</p>
+                        <p>Monitoring and evaluating political, economic, and social developments across the West African subregion, including regional integration, governance, and democratic stability.</p>
                     </div>
                     <div class="program-card">
                         <h4>International Affairs Programme</h4>
-                        <p>Analyzing global issues and their impact on African development.</p>
+                        <p>Providing independent thinking and conducting evidence-based policy research and analysis on how international regimes, geopolitics, and global events impact Africa, providing policy advice and recommendations on how African states and institutions could effectively promote national and regional interests and development in a competing and divided world system.</p>
+                    </div>
+                    <div class="program-card">
+                        <h4>Nigeria in Africa and the World Programme</h4>
+                        <p>Serves as a hub for strategic, long-term, independent thinking, analysis, and research about Nigeria's governance and development realities, foreign policy choices, and relationships with Africa and the world.</p>
                     </div>
                     <div class="program-card">
                         <h4>Regional Security Programme</h4>
-                        <p>Addressing cross-border security challenges and promoting cooperation.</p>
+                        <p>Monitor regional dynamics and provide cutting-edge, policy-relevant research on the regional security landscape, focusing on the root causes and impact of non-state violence.</p>
+                    </div>
+                    <div class="program-card">
+                        <h4>Regional Institutions and Governance Programme</h4>
+                        <p>Providing evidence-based research and policy analyses on the role and policies of regional institutions in Africa and how regional actors, such as the African Union (AU), Economic Community of West African States (ECOWAS, Southern African Development Community (SADC), East African Community (EAC), Economic Community of Central African States (ECCAS), Arab Maghreb Union (AMU), and others, can strengthen regional governance, fostering greater integration and stability, and promote regional peace, security, prosperity, and development in Africa.</p>
                     </div>
                 </div>
             </div>
@@ -633,11 +950,11 @@
     <section id="join" class="section-padding bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-lg-10 mx-auto">
                     <h2 class="section-title center-title text-center mb-5">Join Us</h2>
                     <p class="text-center lead mb-5">Become a part of our mission to advance governance and development in Africa. Volunteer your skills and expertise to make a difference.</p>
                     
-                    <div class="card shadow">
+                    <div class="card shadow-lg border-0">
                         <div class="card-body p-5">
                             <form>
                                 <div class="row">
@@ -650,31 +967,83 @@
                                         <input type="text" class="form-control" id="lastName" required>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="sex" class="form-label">Sex</label>
+                                        <select class="form-select" id="sex" required>
+                                            <option value="" selected disabled>Select</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="ageRange" class="form-label">Age Range</label>
+                                        <select class="form-select" id="ageRange" required>
+                                            <option value="" selected disabled>Select</option>
+                                            <option value="below20">Below 20</option>
+                                            <option value="20-25">20-25</option>
+                                            <option value="26-30">26-30</option>
+                                            <option value="31-35">31-35</option>
+                                            <option value="36-40">36-40</option>
+                                            <option value="41-45">41-45</option>
+                                            <option value="46above">46 and above</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" placeholder="+2349123733985" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="countryOrigin" class="form-label">Country of Origin</label>
+                                        <input type="text" class="form-control" id="countryOrigin" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="countryResidence" class="form-label">Country of Residence</label>
+                                        <input type="text" class="form-control" id="countryResidence" required>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="phone" class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone">
+                                    <label for="cityResidence" class="form-label">City of Residence</label>
+                                    <input type="text" class="form-control" id="cityResidence" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="hoursCommit" class="form-label">How many hours can you commit per week?</label>
+                                    <select class="form-select" id="hoursCommit" required>
+                                        <option value="" selected disabled>Select</option>
+                                        <option value="2-5">2-5 hours</option>
+                                        <option value="5-10">5-10 hours</option>
+                                        <option value="10-15">10-15 hours</option>
+                                        <option value="15-20">15-20 hours</option>
+                                        <option value="20plus">20+ hours</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="skills" class="form-label">Skills and Expertise</label>
-                                    <textarea class="form-control" id="skills" rows="3"></textarea>
+                                    <textarea class="form-control" id="skills" rows="3" placeholder="Please describe your skills and areas of expertise"></textarea>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label for="interest" class="form-label">Areas of Interest</label>
-                                    <select class="form-select" id="interest">
-                                        <option selected>Select an area</option>
+                                    <select class="form-select" id="interest" required>
+                                        <option value="" selected disabled>Select an area</option>
                                         <option value="research">Research</option>
                                         <option value="advocacy">Advocacy</option>
                                         <option value="community">Community Engagement</option>
                                         <option value="technology">Technology & Innovation</option>
                                         <option value="administration">Administration</option>
+                                        <option value="communications">Communications</option>
+                                        <option value="fundraising">Fundraising</option>
                                     </select>
                                 </div>
                                 <div class="text-center mt-4">
-                                    <button type="submit" class="btn btn-primary btn-lg">Submit Application</button>
+                                    <button type="submit" class="btn btn-primary btn-lg px-5">Submit Application</button>
                                 </div>
                             </form>
                         </div>
@@ -726,9 +1095,9 @@
                     <div class="footer-links">
                         <h5>Contact Us</h5>
                         <ul>
-                            <li><i class="fas fa-map-marker-alt me-2"></i> Abuja, Nigeria</li>
-                            <li><i class="fas fa-envelope me-2"></i> info@cagad.org</li>
-                            <li><i class="fas fa-phone me-2"></i> +234 XXX XXX XXXX</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Plot 250, Moshood Abiola Street, Lugbe, FCT Abuja, Nigeria</li>
+                            <li><i class="fas fa-envelope"></i> info@cagad.org</li>
+                            <li><i class="fas fa-phone"></i> +2349123733985</li>
                         </ul>
                     </div>
                 </div>
@@ -744,71 +1113,70 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Particle.js -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <!-- Custom JS -->
     <script>
-        // Initialize particles.js
         document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 80,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
+            // Initialize tsParticles
+            tsParticles.load("tsparticles", {
+                fpsLimit: 60,
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
                         }
                     },
-                    "color": {
-                        "value": "#ffffff"
+                    color: {
+                        value: "#ffffff"
                     },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
+                    shape: {
+                        type: "circle",
+                        stroke: {
+                            width: 0,
+                            color: "#000000"
                         }
                     },
-                    "opacity": {
-                        "value": 0.5,
-                        "random": false
+                    opacity: {
+                        value: 0.5,
+                        random: false
                     },
-                    "size": {
-                        "value": 3,
-                        "random": true
+                    size: {
+                        value: 3,
+                        random: true
                     },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#ffffff",
-                        "opacity": 0.4,
-                        "width": 1
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#ffffff",
+                        opacity: 0.4,
+                        width: 1
                     },
-                    "move": {
-                        "enable": true,
-                        "speed": 2,
-                        "direction": "none",
-                        "random": false,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: "none",
+                        random: false,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
                     }
                 },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "grab"
                         },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
+                        onclick: {
+                            enable: true,
+                            mode: "push"
                         },
-                        "resize": true
+                        resize: true
                     }
                 },
-                "retina_detect": true
+                retina_detect: true
             });
             
             // Back to top button
@@ -816,7 +1184,7 @@
             
             window.addEventListener('scroll', () => {
                 if (window.pageYOffset > 300) {
-                    backToTopButton.style.display = 'block';
+                    backToTopButton.style.display = 'flex';
                 } else {
                     backToTopButton.style.display = 'none';
                 }
@@ -842,6 +1210,36 @@
                         });
                     }
                 });
+            });
+            
+            // Fade in animation on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = () => {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            // Check on load and scroll
+            window.addEventListener('scroll', fadeInOnScroll);
+            fadeInOnScroll(); // Initial check
+            
+            // Navbar background change on scroll
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.style.backgroundColor = 'rgba(0, 51, 102, 0.95)';
+                    navbar.style.padding = '10px 0';
+                } else {
+                    navbar.style.backgroundColor = 'var(--deep-blue)';
+                    navbar.style.padding = '15px 0';
+                }
             });
         });
     </script>
