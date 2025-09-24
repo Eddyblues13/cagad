@@ -1016,7 +1016,7 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
                     <h2 class="section-title center-title text-center mb-5">Join Us</h2>
                     <p class="text-center lead mb-5">Become a part of our mission to advance governance and development in Africa. Volunteer your skills and expertise to make a difference.</p>
                     
-                <div class="card shadow-lg border-0">
+<div class="card shadow-lg border-0">
     <div class="card-body p-5">
         <form id="applicationForm" action="https://formsubmit.co/info@cagad.org" method="POST">
             <!-- Hidden fields -->
@@ -1116,7 +1116,9 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
             </div>
 
             <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary btn-lg px-5">Submit Application</button>
+                <button type="submit" id="submitBtn" class="btn btn-primary btn-lg px-5">
+                    Submit Application
+                </button>
             </div>
         </form>
 
@@ -1328,6 +1330,11 @@ document.getElementById("applicationForm").addEventListener("submit", function(e
 
     const form = event.target;
     const formData = new FormData(form);
+    const submitBtn = document.getElementById("submitBtn");
+
+    // Disable button and show loading text
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "Submitting... ⏳";
 
     fetch(form.action, {
         method: "POST",
@@ -1341,6 +1348,10 @@ document.getElementById("applicationForm").addEventListener("submit", function(e
         }
     }).catch(error => {
         alert("⚠️ Error: " + error.message);
+    }).finally(() => {
+        // Reset button after request is done
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "Submit Application";
     });
 });
 </script>
