@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAGAD - Centre for Advancement of Governance and Development | African Think Tank</title>
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="CAGAD is an independent African think tank advancing good governance, accountability, security, and sustainable development in Nigeria and Africa through evidence-based research and policy advocacy.">
-    <meta name="keywords" content="African think tank, governance, accountability, development, Nigeria, Africa, policy research, security, democracy, sustainable development">
+    <meta name="description"
+        content="CAGAD is an independent African think tank advancing good governance, accountability, security, and sustainable development in Nigeria and Africa through evidence-based research and policy advocacy.">
+    <meta name="keywords"
+        content="African think tank, governance, accountability, development, Nigeria, Africa, policy research, security, democracy, sustainable development">
     <meta name="author" content="Centre for Advancement of Governance and Development">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph Meta Tags for Social Media Sharing -->
     <meta property="og:title" content="CAGAD - Centre for Advancement of Governance and Development">
-    <meta property="og:description" content="Advancing good governance, accountability, security, and development in Nigeria and Africa through evidence-based research and policy advocacy.">
+    <meta property="og:description"
+        content="Advancing good governance, accountability, security, and development in Nigeria and Africa through evidence-based research and policy advocacy.">
     <meta property="og:image" content="https://cagad.org/logo.png">
     <meta property="og:url" content="https://cagad.org">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="CAGAD">
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CAGAD - Centre for Advancement of Governance and Development">
-    <meta name="twitter:description" content="Advancing good governance, accountability, security, and development in Nigeria and Africa.">
+    <meta name="twitter:description"
+        content="Advancing good governance, accountability, security, and development in Nigeria and Africa.">
     <meta name="twitter:image" content="https://cagad.org/logo.png">
     <meta name="twitter:site" content="@CAGAD">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
     <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
-    
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://cagad.org">
-    
+
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
@@ -64,13 +69,15 @@
       ]
     }
     </script>
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
     <!-- tsParticles -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.3.4/tsparticles.bundle.min.js"></script>
     <style>
@@ -80,32 +87,37 @@
             --light-beige: #f5f5dc;
             --accent-gold: #D4AF37;
         }
-        
+
         body {
             font-family: 'Open Sans', sans-serif;
             color: #333;
             padding-top: 80px;
             line-height: 1.6;
         }
-        
-        h1, h2, h3, h4, h5, h6 {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
         }
-        
+
         .navbar {
             background-color: var(--deep-blue);
             padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-        
+
         .navbar-brand {
             font-weight: 700;
             color: white !important;
             font-size: 1.5rem;
         }
-        
+
         .nav-link {
             color: rgba(255, 255, 255, 0.85) !important;
             font-weight: 500;
@@ -113,11 +125,11 @@
             transition: all 0.3s ease;
             position: relative;
         }
-        
+
         .nav-link:hover {
             color: white !important;
         }
-        
+
         .nav-link:after {
             content: '';
             position: absolute;
@@ -128,11 +140,11 @@
             background-color: var(--emerald-green);
             transition: width 0.3s ease;
         }
-        
+
         .nav-link:hover:after {
             width: 100%;
         }
-        
+
         .btn-primary {
             background-color: var(--emerald-green);
             border-color: var(--emerald-green);
@@ -141,14 +153,14 @@
             border-radius: 30px;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             background-color: #005a2d;
             border-color: #005a2d;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 102, 51, 0.3);
         }
-        
+
         .btn-outline-primary {
             color: var(--emerald-green);
             border-color: var(--emerald-green);
@@ -157,13 +169,13 @@
             border-radius: 30px;
             transition: all 0.3s ease;
         }
-        
+
         .btn-outline-primary:hover {
             background-color: var(--emerald-green);
             color: white;
             transform: translateY(-2px);
         }
-        
+
         .hero-section {
             background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 102, 51, 0.8)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
@@ -173,7 +185,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         #tsparticles {
             position: absolute;
             width: 100%;
@@ -181,30 +193,30 @@
             top: 0;
             left: 0;
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 10;
         }
-        
+
         .hero-title {
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
             line-height: 1.2;
         }
-        
+
         .section-padding {
             padding: 100px 0;
         }
-        
+
         .section-title {
             position: relative;
             margin-bottom: 50px;
             padding-bottom: 15px;
             font-size: 2.5rem;
         }
-        
+
         .section-title:after {
             content: '';
             position: absolute;
@@ -215,12 +227,12 @@
             background-color: var(--emerald-green);
             border-radius: 2px;
         }
-        
+
         .center-title:after {
             left: 50%;
             transform: translateX(-50%);
         }
-        
+
         .focus-card {
             border-radius: 12px;
             overflow: hidden;
@@ -230,27 +242,27 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             background: white;
         }
-        
+
         .focus-card:hover {
             transform: translateY(-15px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-        
+
         .focus-card .card-icon {
             font-size: 3.5rem;
             color: var(--emerald-green);
             margin-bottom: 25px;
             transition: all 0.3s ease;
         }
-        
+
         .focus-card:hover .card-icon {
             transform: scale(1.1);
         }
-        
+
         .values-section {
             background-color: var(--light-beige);
         }
-        
+
         .value-box {
             text-align: center;
             padding: 40px 30px;
@@ -262,7 +274,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .value-box:before {
             content: '';
             position: absolute;
@@ -275,28 +287,28 @@
             transform-origin: left;
             transition: transform 0.4s ease;
         }
-        
+
         .value-box:hover:before {
             transform: scaleX(1);
         }
-        
+
         .value-box:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
-        
+
         .value-icon {
             font-size: 3rem;
             color: var(--deep-blue);
             margin-bottom: 20px;
             transition: all 0.3s ease;
         }
-        
+
         .value-box:hover .value-icon {
             color: var(--emerald-green);
             transform: rotateY(180deg);
         }
-        
+
         .pledge-section {
             background: linear-gradient(rgba(0, 51, 102, 0.92), rgba(0, 51, 102, 0.92)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
@@ -305,7 +317,7 @@
             color: white;
             position: relative;
         }
-        
+
         .pledge-section:before {
             content: '';
             position: absolute;
@@ -316,7 +328,7 @@
             background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300592d' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
             opacity: 0.3;
         }
-        
+
         .program-card {
             border-left: 5px solid var(--emerald-green);
             padding: 25px 20px 25px 25px;
@@ -328,7 +340,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .program-card:before {
             content: '';
             position: absolute;
@@ -341,34 +353,34 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-        
+
         .program-card:hover:before {
             opacity: 1;
         }
-        
+
         .program-card:hover {
             transform: translateX(10px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
-        
+
         .program-card h4 {
             position: relative;
             z-index: 1;
             color: var(--deep-blue);
             margin-bottom: 10px;
         }
-        
+
         .program-card p {
             position: relative;
             z-index: 1;
             margin-bottom: 0;
         }
-        
+
         .team-member {
             text-align: center;
             margin-bottom: 30px;
         }
-        
+
         .team-img {
             width: 200px;
             height: 200px;
@@ -379,19 +391,19 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
-        
+
         .team-img:hover {
             transform: scale(1.05);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
-        
+
         footer {
             background-color: var(--deep-blue);
             color: white;
             padding: 80px 0 30px;
             position: relative;
         }
-        
+
         footer:before {
             content: '';
             position: absolute;
@@ -401,14 +413,14 @@
             height: 5px;
             background: linear-gradient(to right, var(--emerald-green), var(--accent-gold));
         }
-        
+
         .footer-links h5 {
             margin-bottom: 25px;
             position: relative;
             padding-bottom: 15px;
             font-weight: 600;
         }
-        
+
         .footer-links h5:after {
             content: '';
             position: absolute;
@@ -419,35 +431,35 @@
             background-color: var(--emerald-green);
             border-radius: 2px;
         }
-        
+
         .footer-links ul {
             list-style: none;
             padding: 0;
         }
-        
+
         .footer-links li {
             margin-bottom: 12px;
             display: flex;
             align-items: center;
         }
-        
+
         .footer-links li i {
             margin-right: 10px;
             color: var(--emerald-green);
             width: 20px;
         }
-        
+
         .footer-links a {
             color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             transition: all 0.3s ease;
         }
-        
+
         .footer-links a:hover {
             color: white;
             padding-left: 5px;
         }
-        
+
         .social-icons a {
             display: inline-flex;
             align-items: center;
@@ -461,12 +473,12 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .social-icons a:hover {
             background: var(--emerald-green);
             transform: translateY(-5px);
         }
-        
+
         .copyright {
             border-top: 1px solid rgba(255, 255, 255, 0.15);
             padding-top: 25px;
@@ -475,7 +487,7 @@
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
         }
-        
+
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -494,19 +506,19 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
+
         .back-to-top:hover {
             background: var(--deep-blue);
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
         }
-        
+
         .contact-info {
             display: flex;
             align-items: flex-start;
             margin-bottom: 20px;
         }
-        
+
         .contact-icon {
             width: 50px;
             height: 50px;
@@ -520,75 +532,77 @@
             margin-right: 15px;
             flex-shrink: 0;
         }
-        
+
         .contact-details h5 {
             margin-bottom: 5px;
             color: var(--deep-blue);
         }
-        
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
             }
-            
+
             .section-title {
                 font-size: 2rem;
             }
-            
+
             .section-padding {
                 padding: 70px 0;
             }
-            
+
             .hero-section {
                 padding: 120px 0 80px;
             }
-            
+
             .navbar-nav {
                 text-align: center;
                 padding-top: 15px;
             }
-            
+
             .nav-link {
                 margin: 5px 0;
             }
-            
+
             .program-card {
                 padding: 20px 15px 20px 20px;
             }
         }
-        
+
         /* Form styling */
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             border-radius: 8px;
             padding: 12px 15px;
             border: 1px solid #e0e0e0;
             transition: all 0.3s ease;
         }
-        
-        .form-control:focus, .form-select:focus {
+
+        .form-control:focus,
+        .form-select:focus {
             border-color: var(--emerald-green);
             box-shadow: 0 0 0 0.2rem rgba(0, 102, 51, 0.15);
         }
-        
+
         .form-label {
             font-weight: 600;
             margin-bottom: 8px;
             color: var(--deep-blue);
         }
-        
+
         /* Animation for cards on scroll */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
         }
-        
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Focus area icons */
         .focus-area-icon {
             width: 70px;
@@ -604,13 +618,13 @@
             flex-shrink: 0;
             transition: all 0.3s ease;
         }
-        
+
         .focus-area-item:hover .focus-area-icon {
             background: var(--emerald-green);
             color: white;
             transform: rotateY(180deg);
         }
-        
+
         .focus-area-item {
             display: flex;
             align-items: flex-start;
@@ -619,29 +633,30 @@
             padding: 20px;
             border-radius: 10px;
         }
-        
+
         .focus-area-item:hover {
             background: rgba(0, 102, 51, 0.03);
             transform: translateY(-5px);
         }
-        
+
         .focus-area-content {
             flex: 1;
         }
-        
+
         .focus-area-content h4 {
             color: var(--deep-blue);
             margin-bottom: 10px;
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="logo.png" alt="CAGAD Logo" width="90" height="70" class="d-inline-block align-text-top me-2">
-                
+
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -668,7 +683,8 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
                     <h1 class="hero-title">Advancing Governance and Development in Africa</h1>
-                    <p class="lead mb-5">An independent, non-profit, non-governmental, and research-centred think tank, focused on advancing good governance, accountability, and development in Nigeria and Africa.</p>
+                    <p class="lead mb-5">An independent, non-profit, non-governmental, and research-centred think tank,
+                        focused on advancing good governance, accountability, and development in Nigeria and Africa.</p>
                     <a href="#about" class="btn btn-lg btn-primary me-3">Learn More</a>
                     <a href="#join" class="btn btn-lg btn-outline-light">Get Involved</a>
                 </div>
@@ -682,20 +698,35 @@
             <div class="row">
                 <div class="col-lg-6 fade-in">
                     <h2 class="section-title">About CAGAD</h2>
-                    <p>The Centre for Advancement of Governance and Development (CAGAD) is an independent, non-profit, non-partisan, non-governmental, and research-centred organisation focused on advancing good governance, democratic accountability, and sustainable development in Nigeria and Africa.</p>
-                    <p>We engage in research and analysis, policy advisory, policy advocacy, policy dialogue, civic engagement, human capacity building, governance and policy consulting, and stakeholder engagement and partnerships to promote national and regional development and tackle pressing governance and development challenges. Very importantly, we create a platform that amplifies the integration of research and data into policy and governance processes in driving sustainable development through evidence-based decision-making.</p>
-                    <p>Through bold ideas, cutting-edge research, digital innovation, and inclusive dialogue, we empower citizens and institutions to strengthen ethical public leadership, transparency, and accountability, shaping policies and development outcomes.</p>
-                    <p>CAGAD connects research to action, offering foresighted, practical policy solutions, analysis, and recommendations that advance democracy, responsive governance, human security, and the Sustainable Development Goals (SDGs), while aligning our work and recommendations with global best practices.</p>
+                    <p>The Centre for Advancement of Governance and Development (CAGAD) is an independent, non-profit,
+                        non-partisan, non-governmental, and research-centred organisation focused on advancing good
+                        governance, democratic accountability, and sustainable development in Nigeria and Africa.</p>
+                    <p>We engage in research and analysis, policy advisory, policy advocacy, policy dialogue, civic
+                        engagement, human capacity building, governance and policy consulting, and stakeholder
+                        engagement and partnerships to promote national and regional development and tackle pressing
+                        governance and development challenges. Very importantly, we create a platform that amplifies the
+                        integration of research and data into policy and governance processes in driving sustainable
+                        development through evidence-based decision-making.</p>
+                    <p>Through bold ideas, cutting-edge research, digital innovation, and inclusive dialogue, we empower
+                        citizens and institutions to strengthen ethical public leadership, transparency, and
+                        accountability, shaping policies and development outcomes.</p>
+                    <p>CAGAD connects research to action, offering foresighted, practical policy solutions, analysis,
+                        and recommendations that advance democracy, responsive governance, human security, and the
+                        Sustainable Development Goals (SDGs), while aligning our work and recommendations with global
+                        best practices.</p>
                     <div class="mt-5">
                         <h3 class="mb-4">Our Vision</h3>
                         <div class="d-flex">
                             <i class="fas fa-eye me-4 mt-2 text-primary fa-2x"></i>
-                            <p>Our vision is to become Nigeria and Africa's leading policy organisation, shaping governance, policies, and development processes and outcomes through research, policy advisory, stakeholder engagement, and digital innovation.</p>
+                            <p>Our vision is to become Nigeria and Africa's leading policy organisation, shaping
+                                governance, policies, and development processes and outcomes through research, policy
+                                advisory, stakeholder engagement, and digital innovation.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 fade-in">
-                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CAGAD Team Discussion" class="img-fluid rounded shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="CAGAD Team Discussion" class="img-fluid rounded shadow-lg">
                 </div>
             </div>
         </div>
@@ -707,7 +738,12 @@
             <div class="row">
                 <div class="col-lg-10 mx-auto fade-in">
                     <h2 class="section-title center-title text-center">Our Mission</h2>
-                    <p class="text-center lead mb-4">CAGAD's mission is to promote responsive governance, democratic accountability and sustainable development. Through evidence-based research, policy advocacy, policy dialogue, and stakeholder collaborations and partnerships, we seek to strengthen governance and policy processes, deepen citizens' participation in governance, enhance evidence-based decision-making, promote inclusive governance, improve human security, and advance sustainable development in Nigeria and Africa.</p>
+                    <p class="text-center lead mb-4">CAGAD's mission is to promote responsive governance, democratic
+                        accountability and sustainable development. Through evidence-based research, policy advocacy,
+                        policy dialogue, and stakeholder collaborations and partnerships, we seek to strengthen
+                        governance and policy processes, deepen citizens' participation in governance, enhance
+                        evidence-based decision-making, promote inclusive governance, improve human security, and
+                        advance sustainable development in Nigeria and Africa.</p>
                 </div>
             </div>
         </div>
@@ -773,7 +809,7 @@
                     </div>
                 </div>
             </div>
-          
+
         </div>
     </section>
 
@@ -806,7 +842,8 @@
                                 <i class="fas fa-search"></i>
                             </div>
                             <h4 class="card-title">Research & Analysis</h4>
-                            <p class="card-text">Conducting cutting-edge evidence-based research on governance and development challenges.</p>
+                            <p class="card-text">Conducting cutting-edge evidence-based research on governance and
+                                development challenges.</p>
                         </div>
                     </div>
                 </div>
@@ -817,7 +854,8 @@
                                 <i class="fas fa-briefcase"></i>
                             </div>
                             <h4 class="card-title">Policy Advisory</h4>
-                            <p class="card-text">Providing timely, actionable, evidence-based policy advice and recommendations to governments, policymakers, and institutions.</p>
+                            <p class="card-text">Providing timely, actionable, evidence-based policy advice and
+                                recommendations to governments, policymakers, and institutions.</p>
                         </div>
                     </div>
                 </div>
@@ -828,7 +866,8 @@
                                 <i class="fas fa-bullhorn"></i>
                             </div>
                             <h4 class="card-title">Policy Advocacy</h4>
-                            <p class="card-text">Engaging in targeted advocacy campaigns that promote transparency and good governance.</p>
+                            <p class="card-text">Engaging in targeted advocacy campaigns that promote transparency and
+                                good governance.</p>
                         </div>
                     </div>
                 </div>
@@ -839,7 +878,9 @@
                                 <i class="fas fa-comments"></i>
                             </div>
                             <h4 class="card-title">Policy Dialogue</h4>
-                            <p class="card-text">Facilitating constructive dialogues between stakeholders, citizens and policymakers on critical governance issues and creating a platform that enables citizens and stakeholders to co-create solutions.</p>
+                            <p class="card-text">Facilitating constructive dialogues between stakeholders, citizens and
+                                policymakers on critical governance issues and creating a platform that enables citizens
+                                and stakeholders to co-create solutions.</p>
                         </div>
                     </div>
                 </div>
@@ -850,7 +891,8 @@
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <h4 class="card-title">Civic Engagement</h4>
-                            <p class="card-text">Empowering citizens and communities through civic awareness, engagement and education programmes, capacity building, and digital enlightenment campaigns.</p>
+                            <p class="card-text">Empowering citizens and communities through civic awareness, engagement
+                                and education programmes, capacity building, and digital enlightenment campaigns.</p>
                         </div>
                     </div>
                 </div>
@@ -861,7 +903,8 @@
                                 <i class="fas fa-users"></i>
                             </div>
                             <h4 class="card-title">Stakeholder Engagement</h4>
-                            <p class="card-text">Building strong partnerships with policymakers, institutions, civic actors, stakeholders, and development partners.</p>
+                            <p class="card-text">Building strong partnerships with policymakers, institutions, civic
+                                actors, stakeholders, and development partners.</p>
                         </div>
                     </div>
                 </div>
@@ -881,7 +924,8 @@
                         </div>
                         <div class="focus-area-content">
                             <h4>Governance</h4>
-                            <p>Promoting good governance, strengthening public leadership integrity, and fostering institutional credibility.</p>
+                            <p>Promoting good governance, strengthening public leadership integrity, and fostering
+                                institutional credibility.</p>
                         </div>
                     </div>
                     <div class="focus-area-item">
@@ -890,7 +934,8 @@
                         </div>
                         <div class="focus-area-content">
                             <h4>Accountability</h4>
-                            <p>Promoting transparency and accountability in governance, monitoring public expenditure, evaluating policies' impact and tracking promises and service delivery.</p>
+                            <p>Promoting transparency and accountability in governance, monitoring public expenditure,
+                                evaluating policies' impact and tracking promises and service delivery.</p>
                         </div>
                     </div>
                     <div class="focus-area-item">
@@ -899,7 +944,9 @@
                         </div>
                         <div class="focus-area-content">
                             <h4>Security</h4>
-                            <p>Money security situations, providing evidence-based analysis, addressing human security gaps and improving citizens' safety and stability across communities.</p>
+                            <p>Monitoring security situations and events, providing evidence-based analysis and reports,
+                                addressing human security gaps, and identifying sustainable solutions to improve
+                                citizens' and communities' safety and national and regional security.</p>
                         </div>
                     </div>
                 </div>
@@ -910,7 +957,8 @@
                         </div>
                         <div class="focus-area-content">
                             <h4>Democracy</h4>
-                            <p>Deepening democratic consolidation, monitoring democratic stability, and fostering citizen participation in governance.</p>
+                            <p>Deepening democratic consolidation, monitoring democratic stability, and fostering
+                                citizen participation in governance.</p>
                         </div>
                     </div>
                     <div class="focus-area-item">
@@ -919,7 +967,8 @@
                         </div>
                         <div class="focus-area-content">
                             <h4>Peacebuilding</h4>
-                            <p>Fostering peacebuilding, conflict resolution and stability in fragile or transition contexts.</p>
+                            <p>Fostering peacebuilding, conflict resolution and stability in fragile or transition
+                                contexts.</p>
                         </div>
                     </div>
                     <div class="focus-area-item">
@@ -929,7 +978,8 @@
                         <div class="focus-area-content">
                             <h4>Sustainable Development</h4>
                             <p>
-Promoting the SDGs, monitoring progress, and advocating for inclusive and sustainable development that meets the needs of present and future generations.</p>
+                                Promoting the SDGs, monitoring progress, and advocating for inclusive and sustainable
+                                development that meets the needs of present and future generations.</p>
                         </div>
                     </div>
                 </div>
@@ -945,65 +995,96 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
                 <div class="col-lg-6 fade-in">
                     <div class="program-card">
                         <h4>Elections Credibility Monitoring</h4>
-                        <p>Monitoring the credibility of elections in Nigeria and Africa, and providing independent, evidence-based, and non-partisan assessments of elections and electoral processes at regional, national and subnational levels.</p>
+                        <p>Monitoring the credibility of elections in Nigeria and Africa, and providing independent,
+                            evidence-based, and non-partisan assessments of elections and electoral processes at
+                            regional, national and subnational levels.</p>
                     </div>
                     <div class="program-card">
                         <h4>Democracy Monitoring Programme</h4>
-                        <p>Tracking the health of democracy in Nigeria and Africa by monitoring trends in constitutional governance, the rule of law, civic freedom, civil liberties, democratic institutions, and citizens' participation in governance.</p>
+                        <p>Tracking the health of democracy in Nigeria and Africa by monitoring trends in constitutional
+                            governance, the rule of law, civic freedom, civil liberties, democratic institutions, and
+                            citizens' participation in governance.</p>
                     </div>
                     <div class="program-card">
                         <h4>Accountability Monitoring Programme</h4>
-                        <p>Monitoring and tracking government performance, transparent budgeting, fiscal responsibility, service delivery on promises, anti-corruption initiatives and evidence for abuse of office, public trust and institutional credibility.</p>
+                        <p>Monitoring and tracking government performance, transparent budgeting, fiscal responsibility,
+                            service delivery on promises, anti-corruption initiatives and evidence for abuse of office,
+                            public trust and institutional credibility.</p>
                     </div>
                     <div class="program-card">
                         <h4>Security Monitoring Programme</h4>
-                        <p>Monitoring and tracking security incidents, analysing conflict and insecurity trends, including terrorism, violent extremism, organised crime, and communal violence, providing early warning, conflict mapping, policy briefs, and advisory guides for governments, institutions, communities, and security actors.</p>
+                        <p>Monitoring and tracking security incidents, analysing conflict and insecurity trends,
+                            including terrorism, violent extremism, organised crime, and communal violence, providing
+                            early warning, conflict mapping, policy briefs, and advisory guides for governments,
+                            institutions, communities, and security actors.</p>
                     </div>
                     <div class="program-card">
                         <h4>Civic Engagement Programme</h4>
-                        <p>Building platforms and tools for citizens' engagement, including youth, women, and underrepresented groups, to effectively participate in governance processes, drive change, and co-create solutions.</p>
+                        <p>Building platforms and tools for citizens' engagement, including youth, women, and
+                            underrepresented groups, to effectively participate in governance processes, drive change,
+                            and co-create solutions.</p>
                     </div>
                 </div>
                 <div class="col-lg-6 fade-in">
                     <div class="program-card">
                         <h4>Central Africa Programme</h4>
-                        <p>Focusing on political, economic, and social developments across the Central African subregion.</p>
+                        <p>Focusing on political, economic, and social developments across the Central African
+                            subregion.</p>
                     </div>
                     <div class="program-card">
                         <h4>East Africa Programme</h4>
-                        <p>Analysing and providing independent assessment on political, economic, and social developments across the East African subregion.</p>
+                        <p>Analysing and providing independent assessment on political, economic, and social
+                            developments across the East African subregion.</p>
                     </div>
                     <div class="program-card">
                         <h4>North Africa Programme</h4>
-                        <p>Driving independent thinking, analysing, and evaluating political, economic, and social developments in the North African region.</p>
+                        <p>Driving independent thinking, analysing, and evaluating political, economic, and social
+                            developments in the North African region.</p>
                     </div>
                     <div class="program-card">
                         <h4>Sahel Programme</h4>
-                        <p>Monitoring, assessing and evaluating political, economic, and social developments across the Sahel region, including broader regional integration, geopolitical dynamics, political stability, and regional and international relations with a particular focus on the Alliance of Sahel States.</p>
+                        <p>Monitoring, assessing and evaluating political, economic, and social developments across the
+                            Sahel region, including broader regional integration, geopolitical dynamics, political
+                            stability, and regional and international relations with a particular focus on the Alliance
+                            of Sahel States.</p>
                     </div>
                     <div class="program-card">
                         <h4>Southern Africa Programme</h4>
-                        <p>Focusing on political, economic, and social developments across the Southern African subregion.</p>
+                        <p>Focusing on political, economic, and social developments across the Southern African
+                            subregion.</p>
                     </div>
                     <div class="program-card">
                         <h4>West Africa Programme</h4>
-                        <p>Monitoring and evaluating political, economic, and social developments across the West African subregion, including regional integration, governance, and democratic stability.</p>
+                        <p>Monitoring and evaluating political, economic, and social developments across the West
+                            African subregion, including regional integration, governance, and democratic stability.</p>
                     </div>
                     <div class="program-card">
                         <h4>International Affairs Programme</h4>
-                        <p>Providing independent thinking and conducting evidence-based policy research and analysis on how international regimes, geopolitics, and global events impact Africa, providing policy advice and recommendations on how African states and institutions could effectively promote national and regional interests and development in a competing and divided world system.</p>
+                        <p>Providing independent thinking and conducting evidence-based policy research and analysis on
+                            how international regimes, geopolitics, and global events impact Africa, providing policy
+                            advice and recommendations on how African states and institutions could effectively promote
+                            national and regional interests and development in a competing and divided world system.</p>
                     </div>
                     <div class="program-card">
                         <h4>Nigeria in Africa and the World Programme</h4>
-                        <p>Serves as a hub for strategic, long-term, independent thinking, analysis, and research about Nigeria's governance and development realities, foreign policy choices, and relationships with Africa and the world.</p>
+                        <p>Serves as a hub for strategic, long-term, independent thinking, analysis, and research about
+                            Nigeria's governance and development realities, foreign policy choices, and relationships
+                            with Africa and the world.</p>
                     </div>
                     <div class="program-card">
                         <h4>Regional Security Programme</h4>
-                        <p>Monitor regional dynamics and provide cutting-edge, policy-relevant research on the regional security landscape, focusing on the root causes and impact of non-state violence.</p>
+                        <p>Monitor regional dynamics and provide cutting-edge, policy-relevant research on the regional
+                            security landscape, focusing on the root causes and impact of non-state violence.</p>
                     </div>
                     <div class="program-card">
                         <h4>Regional Institutions and Governance Programme</h4>
-                        <p>Providing evidence-based research and policy analyses on the role and policies of regional institutions in Africa and how regional actors, such as the African Union (AU), Economic Community of West African States (ECOWAS, Southern African Development Community (SADC), East African Community (EAC), Economic Community of Central African States (ECCAS), Arab Maghreb Union (AMU), and others, can strengthen regional governance, fostering greater integration and stability, and promote regional peace, security, prosperity, and development in Africa.</p>
+                        <p>Providing evidence-based research and policy analyses on the role and policies of regional
+                            institutions in Africa and how regional actors, such as the African Union (AU), Economic
+                            Community of West African States (ECOWAS), Southern African Development Community (SADC),
+                            East African Community (EAC), Economic Community of Central African States (ECCAS), Arab
+                            Maghreb Union (AMU), and others, can strengthen regional governance, fostering greater
+                            integration and stability, and promote regional peace, security, prosperity, and development
+                            in Africa.</p>
                     </div>
                 </div>
             </div>
@@ -1016,120 +1097,128 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
             <div class="row">
                 <div class="col-lg-10 mx-auto">
                     <h2 class="section-title center-title text-center mb-5">Join Us</h2>
-                    <p class="text-center lead mb-5">Become a part of our mission to advance governance and development in Africa. Volunteer your skills and expertise to make a difference.</p>
-                    
-<div class="card shadow-lg border-0">
-    <div class="card-body p-5">
-        <form id="applicationForm" action="https://formsubmit.co/info@cagad.org" method="POST">
-            <!-- Hidden fields -->
-            <input type="hidden" name="_captcha" value="false">
+                    <p class="text-center lead mb-5">Become a part of our mission to advance governance and development
+                        in Africa. Volunteer your skills and expertise to make a difference.</p>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="First Name" id="firstName" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="Last Name" id="lastName" required>
-                </div>
-            </div>
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-5">
+                            <form id="applicationForm" action="https://formsubmit.co/info@cagad.org" method="POST">
+                                <!-- Hidden fields -->
+                                <input type="hidden" name="_captcha" value="false">
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="sex" class="form-label">Sex</label>
-                    <select class="form-select" name="Sex" id="sex" required>
-                        <option value="" disabled selected>Select</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="ageRange" class="form-label">Age Range</label>
-                    <select class="form-select" name="Age Range" id="ageRange" required>
-                        <option value="" disabled selected>Select</option>
-                        <option value="Below 20">Below 20</option>
-                        <option value="20-25">20-25</option>
-                        <option value="26-30">26-30</option>
-                        <option value="31-35">31-35</option>
-                        <option value="36-40">36-40</option>
-                        <option value="41-45">41-45</option>
-                        <option value="46+">46 and above</option>
-                    </select>
-                </div>
-            </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" name="First Name" id="firstName"
+                                            required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" name="Last Name" id="lastName" required>
+                                    </div>
+                                </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" name="Email" id="email" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="phone" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" name="Phone" id="phone" placeholder="+2349123733985" required>
-                </div>
-            </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="sex" class="form-label">Sex</label>
+                                        <select class="form-select" name="Sex" id="sex" required>
+                                            <option value="" disabled selected>Select</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="ageRange" class="form-label">Age Range</label>
+                                        <select class="form-select" name="Age Range" id="ageRange" required>
+                                            <option value="" disabled selected>Select</option>
+                                            <option value="Below 20">Below 20</option>
+                                            <option value="20-25">20-25</option>
+                                            <option value="26-30">26-30</option>
+                                            <option value="31-35">31-35</option>
+                                            <option value="36-40">36-40</option>
+                                            <option value="41-45">41-45</option>
+                                            <option value="46+">46 and above</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="countryOrigin" class="form-label">Country of Origin</label>
-                    <input type="text" class="form-control" name="Country of Origin" id="countryOrigin" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="countryResidence" class="form-label">Country of Residence</label>
-                    <input type="text" class="form-control" name="Country of Residence" id="countryResidence" required>
-                </div>
-            </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" name="Email" id="email" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" name="Phone" id="phone"
+                                            placeholder="+2349123733985" required>
+                                    </div>
+                                </div>
 
-            <div class="mb-3">
-                <label for="cityResidence" class="form-label">City of Residence</label>
-                <input type="text" class="form-control" name="City of Residence" id="cityResidence" required>
-            </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="countryOrigin" class="form-label">Country of Origin</label>
+                                        <input type="text" class="form-control" name="Country of Origin"
+                                            id="countryOrigin" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="countryResidence" class="form-label">Country of Residence</label>
+                                        <input type="text" class="form-control" name="Country of Residence"
+                                            id="countryResidence" required>
+                                    </div>
+                                </div>
 
-            <div class="mb-3">
-                <label for="hoursCommit" class="form-label">How many hours can you commit per week?</label>
-                <select class="form-select" name="Hours Commitment" id="hoursCommit" required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="2-5 hours">2-5 hours</option>
-                    <option value="5-10 hours">5-10 hours</option>
-                    <option value="10-15 hours">10-15 hours</option>
-                    <option value="15-20 hours">15-20 hours</option>
-                    <option value="20+ hours">20+ hours</option>
-                </select>
-            </div>
+                                <div class="mb-3">
+                                    <label for="cityResidence" class="form-label">City of Residence</label>
+                                    <input type="text" class="form-control" name="City of Residence" id="cityResidence"
+                                        required>
+                                </div>
 
-            <div class="mb-3">
-                <label for="skills" class="form-label">Skills and Expertise</label>
-                <textarea class="form-control" name="Skills" id="skills" rows="3" placeholder="Please describe your skills and areas of expertise"></textarea>
-            </div>
+                                <div class="mb-3">
+                                    <label for="hoursCommit" class="form-label">How many hours can you commit per
+                                        week?</label>
+                                    <select class="form-select" name="Hours Commitment" id="hoursCommit" required>
+                                        <option value="" disabled selected>Select</option>
+                                        <option value="2-5 hours">2-5 hours</option>
+                                        <option value="5-10 hours">5-10 hours</option>
+                                        <option value="10-15 hours">10-15 hours</option>
+                                        <option value="15-20 hours">15-20 hours</option>
+                                        <option value="20+ hours">20+ hours</option>
+                                    </select>
+                                </div>
 
-            <div class="mb-4">
-                <label for="interest" class="form-label">Areas of Interest</label>
-                <select class="form-select" name="Areas of Interest" id="interest" required>
-                    <option value="" disabled selected>Select an area</option>
-                    <option value="Research">Research</option>
-                    <option value="Advocacy">Advocacy</option>
-                    <option value="Community Engagement">Community Engagement</option>
-                    <option value="Technology & Innovation">Technology & Innovation</option>
-                    <option value="Administration">Administration</option>
-                    <option value="Communications">Communications</option>
-                    <option value="Fundraising">Fundraising</option>
-                </select>
-            </div>
+                                <div class="mb-3">
+                                    <label for="skills" class="form-label">Skills and Expertise</label>
+                                    <textarea class="form-control" name="Skills" id="skills" rows="3"
+                                        placeholder="Please describe your skills and areas of expertise"></textarea>
+                                </div>
 
-            <div class="text-center mt-4">
-                <button type="submit" id="submitBtn" class="btn btn-primary btn-lg px-5">
-                    Submit Application
-                </button>
-            </div>
-        </form>
+                                <div class="mb-4">
+                                    <label for="interest" class="form-label">Areas of Interest</label>
+                                    <select class="form-select" name="Areas of Interest" id="interest" required>
+                                        <option value="" disabled selected>Select an area</option>
+                                        <option value="Research">Research</option>
+                                        <option value="Advocacy">Advocacy</option>
+                                        <option value="Community Engagement">Community Engagement</option>
+                                        <option value="Technology & Innovation">Technology & Innovation</option>
+                                        <option value="Administration">Administration</option>
+                                        <option value="Communications">Communications</option>
+                                        <option value="Fundraising">Fundraising</option>
+                                    </select>
+                                </div>
 
-        <!-- Success Message -->
-        <div id="successMessage" class="alert alert-success mt-4 text-center d-none">
-            ✅ Thank you! Your application has been submitted successfully.
-        </div>
-    </div>
-</div>
+                                <div class="text-center mt-4">
+                                    <button type="submit" id="submitBtn" class="btn btn-primary btn-lg px-5">
+                                        Submit Application
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Success Message -->
+                            <div id="successMessage" class="alert alert-success mt-4 text-center d-none">
+                                ✅ Thank you! Your application has been submitted successfully.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1141,7 +1230,8 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
             <div class="row">
                 <div class="col-lg-4 mb-4 mb-lg-0">
                     <h3 class="text-white mb-4">CAGAD</h3>
-                    <p>Advancing good governance and deepening democratic consolidation, accountability, security, and development in Nigeria and Africa through research and independent thinking.</p>
+                    <p>Advancing good governance and deepening democratic consolidation, accountability, security, and
+                        development in Nigeria and Africa through research and independent thinking.</p>
                     <div class="social-icons mt-4">
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -1177,7 +1267,8 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
                     <div class="footer-links">
                         <h5>Contact Us</h5>
                         <ul>
-                            <li><i class="fas fa-map-marker-alt"></i> Plot 250, Moshood Abiola Street, Lugbe, FCT Abuja, Nigeria</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Plot 250, Moshood Abiola Street, Lugbe, FCT Abuja,
+                                Nigeria</li>
                             <li><i class="fas fa-envelope"></i> info@cagad.org</li>
                             <li><i class="fas fa-phone"></i> +2349123733985</li>
                         </ul>
@@ -1197,7 +1288,7 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize tsParticles
             tsParticles.load("tsparticles", {
                 fpsLimit: 60,
@@ -1260,10 +1351,10 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
                 },
                 retina_detect: true
             });
-            
+
             // Back to top button
             const backToTopButton = document.querySelector('.back-to-top');
-            
+
             window.addEventListener('scroll', () => {
                 if (window.pageYOffset > 300) {
                     backToTopButton.style.display = 'flex';
@@ -1271,20 +1362,20 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
                     backToTopButton.style.display = 'none';
                 }
             });
-            
+
             backToTopButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-            
+
             // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
+
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         targetElement.scrollIntoView({
@@ -1293,25 +1384,25 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
                     }
                 });
             });
-            
+
             // Fade in animation on scroll
             const fadeElements = document.querySelectorAll('.fade-in');
-            
+
             const fadeInOnScroll = () => {
                 fadeElements.forEach(element => {
                     const elementTop = element.getBoundingClientRect().top;
                     const elementVisible = 150;
-                    
+
                     if (elementTop < window.innerHeight - elementVisible) {
                         element.classList.add('visible');
                     }
                 });
             };
-            
+
             // Check on load and scroll
             window.addEventListener('scroll', fadeInOnScroll);
             fadeInOnScroll(); // Initial check
-            
+
             // Navbar background change on scroll
             const navbar = document.querySelector('.navbar');
             window.addEventListener('scroll', () => {
@@ -1325,37 +1416,38 @@ Promoting the SDGs, monitoring progress, and advocating for inclusive and sustai
             });
         });
     </script>
-    
-<script>
-document.getElementById("applicationForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // stop normal submit
 
-    const form = event.target;
-    const formData = new FormData(form);
-    const submitBtn = document.getElementById("submitBtn");
+    <script>
+        document.getElementById("applicationForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // stop normal submit
 
-    // Disable button and show loading text
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = "Submitting... ⏳";
+            const form = event.target;
+            const formData = new FormData(form);
+            const submitBtn = document.getElementById("submitBtn");
 
-    fetch(form.action, {
-        method: "POST",
-        body: formData
-    }).then(response => {
-        if (response.ok) {
-            form.reset(); // clear form
-            document.getElementById("successMessage").classList.remove("d-none");
-        } else {
-            alert("❌ Something went wrong. Please try again.");
-        }
-    }).catch(error => {
-        alert("⚠️ Error: " + error.message);
-    }).finally(() => {
-        // Reset button after request is done
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = "Submit Application";
-    });
-});
-</script>
+            // Disable button and show loading text
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = "Submitting... ⏳";
+
+            fetch(form.action, {
+                method: "POST",
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    form.reset(); // clear form
+                    document.getElementById("successMessage").classList.remove("d-none");
+                } else {
+                    alert("❌ Something went wrong. Please try again.");
+                }
+            }).catch(error => {
+                alert("⚠️ Error: " + error.message);
+            }).finally(() => {
+                // Reset button after request is done
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = "Submit Application";
+            });
+        });
+    </script>
 </body>
+
 </html>
