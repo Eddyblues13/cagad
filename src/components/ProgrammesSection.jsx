@@ -25,26 +25,6 @@ const leftProgrammes = [
 
 const rightProgrammes = [
   {
-    title: 'Central Africa Programme',
-    desc: 'Focusing on political, economic, and social developments across the Central African subregion.',
-  },
-  {
-    title: 'East Africa Programme',
-    desc: 'Analysing and providing independent assessment on political, economic, and social developments across the East African subregion.',
-  },
-  {
-    title: 'North Africa Programme',
-    desc: 'Driving independent thinking, analysing, and evaluating political, economic, and social developments in the North African region.',
-  },
-  {
-    title: 'Sahel Programme',
-    desc: 'Monitoring, assessing and evaluating political, economic, and social developments across the Sahel region, including broader regional integration, geopolitical dynamics, political stability, and regional and international relations with a particular focus on the Alliance of Sahel States.',
-  },
-  {
-    title: 'Southern Africa Programme',
-    desc: 'Focusing on political, economic, and social developments across the Southern African subregion.',
-  },
-  {
     title: 'West Africa Programme',
     desc: 'Monitoring and evaluating political, economic, and social developments across the West African subregion, including regional integration, governance, and democratic stability.',
   },
