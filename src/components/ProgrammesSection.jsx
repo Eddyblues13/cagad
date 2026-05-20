@@ -17,13 +17,13 @@ const leftProgrammes = [
     title: 'Security Monitoring Programme',
     desc: 'Monitoring and tracking security incidents, analysing conflict and insecurity trends, including terrorism, violent extremism, organised crime, and communal violence, providing early warning, conflict mapping, policy briefs, and advisory guides for governments, institutions, communities, and security actors.',
   },
+]
+
+const rightProgrammes = [
   {
     title: 'Civic Engagement Programme',
     desc: "Building platforms and tools for citizens' engagement, including youth, women, and underrepresented groups, to effectively participate in governance processes, drive change, and co-create solutions.",
   },
-]
-
-const rightProgrammes = [
   {
     title: 'West Africa Programme',
     desc: 'Monitoring and evaluating political, economic, and social developments across the West African subregion, including regional integration, governance, and democratic stability.',
@@ -31,18 +31,6 @@ const rightProgrammes = [
   {
     title: 'International Affairs Programme',
     desc: "Providing independent thinking and conducting evidence-based policy research and analysis on how international regimes, geopolitics, and global events impact Africa, providing policy advice and recommendations on how African states and institutions could effectively promote national and regional interests and development in a competing and divided world system.",
-  },
-  {
-    title: 'Nigeria in Africa and the World Programme',
-    desc: "Serves as a hub for strategic, long-term, independent thinking, analysis, and research about Nigeria's governance and development realities, foreign policy choices, and relationships with Africa and the world.",
-  },
-  {
-    title: 'Regional Security Programme',
-    desc: 'Monitor regional dynamics and provide cutting-edge, policy-relevant research on the regional security landscape, focusing on the root causes and impact of non-state violence.',
-  },
-  {
-    title: 'Regional Institutions and Governance Programme',
-    desc: 'Providing evidence-based research and policy analyses on the role and policies of regional institutions in Africa and how regional actors, such as the African Union (AU), Economic Community of West African States (ECOWAS), Southern African Development Community (SADC), East African Community (EAC), Economic Community of Central African States (ECCAS), Arab Maghreb Union (AMU), and others, can strengthen regional governance, fostering greater integration and stability, and promote regional peace, security, prosperity, and development in Africa.',
   },
 ]
 

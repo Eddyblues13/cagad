@@ -40,7 +40,7 @@ const faqs = [
   {
     question: 'What programmes does CAGAD run?',
     answer:
-      'CAGAD runs multiple programmes including: Elections Credibility Monitoring, Democracy Monitoring, Accountability Monitoring, Security Monitoring, Civic Engagement, and regional programmes covering West Africa, East Africa, Central Africa, North Africa, Southern Africa, and the Sahel region. It also operates an International Affairs Programme, Nigeria in Africa and the World Programme, Regional Security Programme, and Regional Institutions and Governance Programme.',
+      'CAGAD runs multiple programmes including: Elections Credibility Monitoring, Democracy Monitoring, Accountability Monitoring, Security Monitoring, Civic Engagement, West Africa Programme, and International Affairs Programme.',
   },
 ]
 
