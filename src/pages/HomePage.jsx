@@ -4,6 +4,7 @@ import HeroSection from '../components/HeroSection.jsx'
 import AboutSection from '../components/AboutSection.jsx'
 import MissionSection from '../components/MissionSection.jsx'
 import ValuesSection from '../components/ValuesSection.jsx'
+import LeadershipSection from '../components/LeadershipSection.jsx'
 import WorkSection from '../components/WorkSection.jsx'
 import FocusAreasSection from '../components/FocusAreasSection.jsx'
 import ProgrammesSection from '../components/ProgrammesSection.jsx'
@@ -26,6 +27,7 @@ export default function HomePage() {
         <AboutSection />
         <MissionSection />
         <ValuesSection />
+        <LeadershipSection />
         <WorkSection />
         <FocusAreasSection />
         <ProgrammesSection />

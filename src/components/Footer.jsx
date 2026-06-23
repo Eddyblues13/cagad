@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="col-lg-4 mb-4 mb-lg-0">
             <h3 className="text-white mb-4">CAGAD</h3>
             <p>
-              Advancing good governance and deepening democratic consolidation, accountability, security, and
+              Advancing good governance and strengthening democratic accountability, security, and
               sustainable development in Africa through research and independent thinking.
             </p>
             <nav className="social-icons mt-4" aria-label="CAGAD social media links">
