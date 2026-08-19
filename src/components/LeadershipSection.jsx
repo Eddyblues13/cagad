@@ -5,27 +5,27 @@ import FadeIn from './FadeIn.jsx'
 // Composition. A short professional bio can be added to any person via the
 // `bio` field — when present, the card becomes clickable and opens a modal.
 const board = [
-  { name: 'Dr Matthew Ayibakuro', role: 'Board Chairman', bio: '' },
-  { name: 'Nkiruka Uzodi', role: 'Member', bio: '' },
-  { name: 'Prof Ernest T. Aniche', role: 'Member', bio: '' },
-  { name: 'Mfoniso Obinna', role: 'Member', bio: '' },
-  { name: 'Benjamin Ekeyi', role: 'Member', bio: '' },
-  { name: 'Zainab Abdulfattah', role: 'Member', bio: '' },
-  { name: 'Daniel Atikami', role: 'Member', bio: '' },
-  { name: 'Eseimokumo Albert Tony', role: 'Member', bio: '' },
-  { name: 'Godstime Ezekiel', role: 'Member / Board Secretary', bio: '' },
+  { name: 'Dr Matthew Ayibakuro', role: 'Board Chairman', bio: '', photo: '/Dr Matthew Ayibakuro.jpeg' },
+  { name: 'Nkiruka Uzodi', role: 'Member', bio: '', photo: '/Nkiru Uzodi.jpeg' },
+  { name: 'Prof Ernest T. Aniche', role: 'Member', bio: '', photo: '/Prof Ernest T. Aniche 1.jpeg' },
+  { name: 'Mfoniso Obinna', role: 'Member', bio: '', photo: '/Mfoniso Obinna.jpeg' },
+  { name: 'Benjamin Ekeyi', role: 'Member', bio: '', photo: '/Benjamin Ekeyi.jpeg' },
+  { name: 'Zainab Abdulfattah', role: 'Member', bio: '', photo: '/Zainab Abdulfattah.jpeg' },
+  { name: 'Daniel Atikami', role: 'Member', bio: '', photo: '/Daniel Atikami 1.jpeg' },
+  { name: 'Eseimokumo Albert Tony', role: 'Member', bio: '', photo: '/Eseimokumo Albert Tony.jpeg' },
+  { name: 'Godstime Ezekiel', role: 'Member / Board Secretary', bio: '', photo: '/Godstime Ezekiel.jpeg' },
 ]
 
 const management = [
-  { name: 'Godstime Ezekiel', role: 'Team Lead & Executive Director', bio: '' },
-  { name: 'Mfoniso Obinna', role: 'Head, Funding & Partnerships', bio: '' },
-  { name: 'Emmanuel Ifeanyi', role: 'Head, Finance & Administration', bio: '' },
+  { name: 'Godstime Ezekiel', role: 'Team Lead & Executive Director', bio: '', photo: '/Godstime Ezekiel.jpeg' },
+  { name: 'Mfoniso Obinna', role: 'Head, Funding & Partnerships', bio: '', photo: '/Mfoniso Obinna.jpeg' },
+  { name: 'Emmanuel Ifeanyi', role: 'Head, Finance & Administration', bio: '', photo: '/Emmanuel Ifeanyi 1.jpeg' },
   { name: 'Edwin Efemini', role: 'Head, Technology & Innovation', bio: '' },
-  { name: 'Yeboah Acquah', role: 'Head, Communications & Public Relations', bio: '' },
-  { name: 'John Awojobi', role: 'Head, Research & Policy', bio: '' },
-  { name: 'Ayodeji Ayinde', role: 'Head, Legal & Compliance', bio: '' },
-  { name: 'Young Mfon', role: 'Program Lead, International Affairs (IAP)', bio: '' },
-  { name: 'Oyinmiebi Peter', role: 'Program Lead, Elections Credibility Monitoring (ECMP)', bio: '' },
+  { name: 'Yeboah Acquah', role: 'Head, Communications & Public Relations', bio: '', photo: '/Yeboah Acquah.jpeg' },
+  { name: 'John Awojobi', role: 'Head, Research & Policy', bio: '', photo: '/John Awojobi.jpeg' },
+  { name: 'Ayodeji Ayinde', role: 'Head, Legal & Compliance', bio: '', photo: '/Ayodeji Ayinde.jpeg' },
+  { name: 'Young Mfon', role: 'Program Lead, International Affairs (IAP)', bio: '', photo: '/Young Mfon.jpeg' },
+  { name: 'Oyinmiebi Peter', role: 'Program Lead, Elections Credibility Monitoring (ECMP)', bio: '', photo: '/Oyinmiebi Peter.jpeg' },
 ]
 
 const slugify = (name) =>
@@ -43,7 +43,7 @@ function PersonCard({ person, onOpen }) {
   // until then we show a brand-styled initials avatar.
   const [imgOk, setImgOk] = useState(true)
   const hasBio = Boolean(person.bio)
-  const photo = person.photo || `/team/${slugify(person.name)}.jpg`
+  const photo = person.photo ? encodeURI(person.photo) : `/team/${slugify(person.name)}.jpg`
 
   const cardProps = hasBio
     ? {
@@ -97,7 +97,7 @@ function BioModal({ person, onClose }) {
   }, [onClose])
 
   if (!person) return null
-  const photo = person.photo || `/team/${slugify(person.name)}.jpg`
+  const photo = person.photo ? encodeURI(person.photo) : `/team/${slugify(person.name)}.jpg`
 
   return (
     <div className="bio-modal-overlay" onClick={onClose} role="presentation">

@@ -42,7 +42,7 @@ export default function JoinSection() {
             </p>
 
             <div className="card shadow-lg border-0">
-              <div className="card-body p-5">
+              <div className="card-body p-3 p-md-5">
                 <form
                   id="applicationForm"
                   action="https://formsubmit.co/info@cagad.org"

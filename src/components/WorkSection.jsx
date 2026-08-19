@@ -19,7 +19,7 @@ export default function WorkSection() {
             <div className="col-md-6 col-lg-4 mb-4" key={item.title} role="listitem">
               <FadeIn>
                 <article className="focus-card card h-100" aria-label={item.title}>
-                  <div className="card-body text-center p-5">
+                  <div className="card-body text-center p-4 p-md-5">
                     <div className="card-icon" aria-hidden="true">
                       <i className={item.icon}></i>
                     </div>

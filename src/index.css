@@ -12,6 +12,16 @@ body {
     line-height: 1.6;
 }
 
+main section[id] {
+    scroll-margin-top: 100px;
+}
+
+@media (max-width: 575.98px) {
+    main section[id] {
+        scroll-margin-top: 85px;
+    }
+}
+
 h1,
 h2,
 h3,
@@ -539,6 +549,86 @@ footer:before {
 
     .program-card {
         padding: 20px 15px 20px 20px;
+    }
+
+    .bio-modal {
+        padding: 28px 22px;
+    }
+
+    .bio-modal-header {
+        gap: 14px;
+    }
+
+    .bio-modal-photo {
+        width: 68px;
+        height: 68px;
+    }
+
+    .faq-question {
+        padding: 18px 20px;
+        font-size: 1rem;
+    }
+
+    .faq-answer.open {
+        padding: 16px 20px 22px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 575.98px) {
+    body {
+        padding-top: 70px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-section {
+        padding: 100px 0 60px;
+    }
+
+    .lead {
+        font-size: 1.05rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 35px;
+    }
+
+    .section-padding {
+        padding: 50px 0;
+    }
+
+    .value-box {
+        padding: 30px 20px;
+    }
+
+    .focus-area-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 1.4rem;
+        margin-right: 14px;
+    }
+
+    .focus-area-item {
+        padding: 14px;
+    }
+
+    .person-body {
+        padding: 18px 14px 22px;
+    }
+
+    .staff-coming-soon {
+        padding: 30px 16px;
+    }
+
+    .back-to-top {
+        width: 46px;
+        height: 46px;
+        bottom: 18px;
+        right: 18px;
     }
 }
 
