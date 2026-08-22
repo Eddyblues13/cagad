@@ -43,6 +43,22 @@ h6 {
     font-weight: 700;
     color: white !important;
     font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Company registration number, set beside the logo on every viewport. */
+.brand-rc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.78);
+    padding-left: 12px;
+    border-left: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 .nav-link {
@@ -541,6 +557,16 @@ footer:before {
     .navbar-nav {
         text-align: center;
         padding-top: 15px;
+    }
+
+    .navbar-brand {
+        gap: 9px;
+    }
+
+    .brand-rc {
+        font-size: 0.6rem;
+        letter-spacing: 0.06em;
+        padding-left: 9px;
     }
 
     .nav-link {

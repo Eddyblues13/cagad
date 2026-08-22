@@ -152,8 +152,8 @@ export default function LeadershipSection() {
           </div>
           <h2 className="section-title center-title text-center" id="leadership-heading">Board of Directors</h2>
           <p className="team-intro text-center mx-auto">
-            Meet the diverse CAGAD Board of Directors — experts in governance, democracy, public policy, law,
-            and international development — providing strong governance oversight and strategic guidance.
+            The diverse CAGAD Board of Directors, comprising experts in governance, democracy, public policy,
+            law, and international development, providing strong governance oversight and strategic guidance.
           </p>
         </FadeIn>
 

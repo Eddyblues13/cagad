@@ -1,7 +1,7 @@
 import FadeIn from './FadeIn.jsx'
 
 const workItems = [
-  { icon: 'fas fa-search', title: 'Research & Analysis', desc: 'Conducting cutting-edge evidence-based research on governance and development challenges.' },
+  { icon: 'fas fa-search', title: 'Research & Analysis', desc: 'Conducting evidence-based research and analysis on governance and development issues.' },
   { icon: 'fas fa-briefcase', title: 'Policy Advisory', desc: 'Providing timely, actionable, evidence-based policy advice and recommendations to governments, policymakers, and institutions.' },
   { icon: 'fas fa-bullhorn', title: 'Policy Advocacy', desc: 'Engaging in targeted advocacy campaigns that promote transparency and good governance.' },
   { icon: 'fas fa-comments', title: 'Policy Dialogue', desc: 'Facilitating constructive dialogues between stakeholders, citizens and policymakers on critical governance issues and creating a platform that enables citizens and stakeholders to co-create solutions.' },

@@ -66,10 +66,11 @@ export default function Navbar() {
               alt="CAGAD - Centre for Advancement of Governance and Development Logo"
               width="90"
               height="70"
-              className="d-inline-block align-text-top me-2"
+              className="d-inline-block"
               loading="eager"
               itemProp="image"
             />
+            <span className="brand-rc">RC NO. 9471761</span>
           </a>
           <button
             className="navbar-toggler"
