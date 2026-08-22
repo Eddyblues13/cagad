@@ -12,7 +12,9 @@ export default function AboutSection() {
                 <p itemProp="description">
                   The <strong>Centre for Advancement of Governance and Development (CAGAD)</strong> is an independent, non-profit,
                   non-partisan, non-governmental, research-centred organisation, focused on advancing good governance,
-                  democratic accountability, and sustainable development in Nigeria and Africa.
+                  democratic accountability, and sustainable development in Nigeria and Africa. CAGAD is registered
+                  with the Corporate Affairs Commission of Nigeria as a nonprofit company Limited by Guarantee with
+                  RC NO. 9471761.
                 </p>
                 <p>
                   We engage in research and analysis, policy advisory and advocacy, policy dialogue, governance and policy
