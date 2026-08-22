@@ -1047,6 +1047,9 @@ textarea:focus-visible {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* Portraits are 4:5 with the head high in the frame; bias the circular
+       crop upward so the top of the head is never cut off. */
+    object-position: 50% 10%;
 }
 
 .bio-modal-header h3 {
