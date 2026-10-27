@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import Navbar from '../components/Navbar.jsx'
+import { useLocation } from 'react-router'
 import HeroSection from '../components/HeroSection.jsx'
 import AboutSection from '../components/AboutSection.jsx'
 import MissionSection from '../components/MissionSection.jsx'
@@ -8,34 +8,33 @@ import LeadershipSection from '../components/LeadershipSection.jsx'
 import WorkSection from '../components/WorkSection.jsx'
 import FocusAreasSection from '../components/FocusAreasSection.jsx'
 import ProgrammesSection from '../components/ProgrammesSection.jsx'
+import LatestPostsSection from '../components/LatestPostsSection.jsx'
 import FAQSection from '../components/FAQSection.jsx'
 import JoinSection from '../components/JoinSection.jsx'
-import Footer from '../components/Footer.jsx'
-import BackToTop from '../components/BackToTop.jsx'
 
 export default function HomePage() {
+  const { hash } = useLocation()
+
+  // Arriving from another page via a section link (e.g. /#about): scroll to it.
   useEffect(() => {
-    // Import Bootstrap JS for navbar toggler functionality
-    import('bootstrap/dist/js/bootstrap.bundle.min.js')
-  }, [])
+    if (hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [hash])
 
   return (
     <>
-      <Navbar />
-      <main id="main-content" role="main" aria-label="Main content">
-        <HeroSection />
-        <AboutSection />
-        <MissionSection />
-        <ValuesSection />
-        <LeadershipSection />
-        <WorkSection />
-        <FocusAreasSection />
-        <ProgrammesSection />
-        <FAQSection />
-        <JoinSection />
-      </main>
-      <Footer />
-      <BackToTop />
+      <HeroSection />
+      <AboutSection />
+      <MissionSection />
+      <ValuesSection />
+      <LeadershipSection />
+      <WorkSection />
+      <FocusAreasSection />
+      <ProgrammesSection />
+      <LatestPostsSection />
+      <FAQSection />
+      <JoinSection />
     </>
   )
 }

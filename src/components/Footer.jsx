@@ -1,6 +1,15 @@
+import { Link, useLocation, useNavigate } from 'react-router'
+
 export default function Footer() {
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+
   const handleScrollTo = (e, target) => {
     e.preventDefault()
+    if (pathname !== '/') {
+      navigate(`/${target}`)
+      return
+    }
     const el = document.querySelector(target)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
@@ -49,7 +58,7 @@ export default function Footer() {
               <ul>
                 <li><a href="#">Reports</a></li>
                 <li><a href="#">Publications</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><Link to="/blog">Blog</Link></li>
                 <li><a href="#">News &amp; Stories</a></li>
                 <li><a href="#">Events</a></li>
               </ul>

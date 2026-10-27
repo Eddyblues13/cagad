@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [collapsed, setCollapsed] = useState(true)
   const [aboutOpen, setAboutOpen] = useState(false)
   const navRef = useRef(null)
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const onBlog = pathname.startsWith('/blog')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +23,11 @@ export default function Navbar() {
     setCollapsed(true)
     setAboutOpen(false)
     if (targetId === '#') return
+    // Section links live on the homepage; from other pages, go there first.
+    if (pathname !== '/') {
+      navigate(`/${targetId}`)
+      return
+    }
     const el = document.querySelector(targetId)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
@@ -35,6 +44,7 @@ export default function Navbar() {
     { href: '#work', label: 'Our Work' },
     { href: '#focus', label: 'Focus Areas' },
     { href: '#programmes', label: 'Programmes' },
+    { to: '/blog', label: 'Blog' },
     { href: '#faq', label: 'FAQ' },
     { href: '#join', label: 'Join Us' },
   ]
@@ -133,7 +143,24 @@ export default function Navbar() {
                 </ul>
               </li>
 
-              {navLinks.slice(1).map((link) => (
+              {navLinks.slice(1).map((link) => link.to ? (
+                <li className="nav-item" key={link.to} role="none">
+                  <Link
+                    className={`nav-link ${onBlog ? 'active' : ''}`}
+                    to={link.to}
+                    onClick={() => {
+                      setCollapsed(true)
+                      setAboutOpen(false)
+                    }}
+                    role="menuitem"
+                    itemProp="url"
+                    aria-current={onBlog ? 'page' : undefined}
+                    aria-label={`Go to the ${link.label}`}
+                  >
+                    <span itemProp="name">{link.label}</span>
+                  </Link>
+                </li>
+              ) : (
                 <li className="nav-item" key={link.href} role="none">
                   <a
                     className="nav-link"
