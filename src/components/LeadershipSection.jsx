@@ -20,7 +20,7 @@ const management = [
   { name: 'Godstime Ezekiel', role: 'Team Lead & Executive Director', bio: '', photo: '/Godstime Ezekiel.jpeg' },
   { name: 'Mfoniso Obinna', role: 'Head, Funding & Partnerships', bio: '', photo: '/Mfoniso Obinna.jpeg' },
   { name: 'Emmanuel Ifeanyi', role: 'Head, Finance & Administration', bio: '', photo: '/Emmanuel Ifeanyi 1.jpeg' },
-  { name: 'Edwin Efemini', role: 'Head, Technology & Innovation', bio: '' },
+  { name: 'Edwin Efemini', role: 'Head, Technology & Innovation', bio: '', photo: '/Edwin Efemini.jpeg' },
   { name: 'Yeboah Acquah', role: 'Head, Communications & Public Relations', bio: '', photo: '/Yeboah Acquah.jpeg' },
   { name: 'John Awojobi', role: 'Head, Research & Policy', bio: '', photo: '/John Awojobi.jpeg' },
   { name: 'Ayodeji Ayinde', role: 'Head, Legal & Compliance', bio: '', photo: '/Ayodeji Ayinde.jpeg' },
