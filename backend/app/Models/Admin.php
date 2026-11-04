@@ -50,6 +50,16 @@ class Admin extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    /**
+     * The browsers this admin is signed in on.
+     *
+     * @return HasMany<AdminToken, $this>
+     */
+    public function tokens(): HasMany
+    {
+        return $this->hasMany(AdminToken::class);
+    }
+
     public function isSuperAdmin(): bool
     {
         return $this->role === AdminRole::SuperAdmin;

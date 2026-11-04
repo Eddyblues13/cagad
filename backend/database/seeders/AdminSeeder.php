@@ -43,7 +43,7 @@ class AdminSeeder extends Seeder
         $output?->info('Created the default super admin.');
         $output?->twoColumnDetail('Email', $email);
         $output?->twoColumnDetail('Password', $passwordWasGenerated ? $password : 'ADMIN_PASSWORD from .env');
-        $output?->twoColumnDetail('Sign in at', route('admin.login'));
+        $output?->twoColumnDetail('Sign in at', config('app.frontend_url').'/admin/login');
 
         if ($passwordWasGenerated) {
             $output?->warn('Change this password on the Account page after signing in.');

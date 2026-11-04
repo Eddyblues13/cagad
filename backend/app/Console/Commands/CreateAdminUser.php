@@ -62,7 +62,7 @@ class CreateAdminUser extends Command
             $this->components->info("Created super admin {$email}.");
         }
 
-        $this->line('  Sign in at '.route('admin.login'));
+        $this->line('  Sign in at '.config('app.frontend_url').'/admin/login');
 
         return self::SUCCESS;
     }

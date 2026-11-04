@@ -25,56 +25,64 @@ class AdminPostTest extends TestCase
         $this->admin = Admin::factory()->create(['name' => 'Ada Editor']);
     }
 
-    public function test_guests_cannot_reach_the_admin(): void
+    public function test_guests_cannot_reach_the_posts(): void
     {
-        $this->get('/admin/posts')->assertRedirect('/admin/login');
-        $this->post('/admin/posts', ['title' => 'Nope'])->assertRedirect('/admin/login');
+        $this->getJson('/api/v1/admin/posts')->assertUnauthorized();
+        $this->postJson('/api/v1/admin/posts', ['title' => 'Nope', 'status' => 'draft'])->assertUnauthorized();
+
+        $this->assertDatabaseCount('posts', 0);
     }
 
-    public function test_the_posts_screens_render(): void
+    public function test_the_list_includes_drafts_and_counts_each_status(): void
     {
-        $post = Post::factory()->published()->withCover()->create();
+        $live = Post::factory()->published()->withCover()->create();
+        $draft = Post::factory()->create();
 
-        $this->actingAs($this->admin, 'admin')->get('/admin/posts')->assertOk()->assertSee($post->title);
-        $this->actingAs($this->admin, 'admin')->get('/admin/posts/create')->assertOk()->assertSee('value="Ada Editor"', false);
-        $this->actingAs($this->admin, 'admin')->get("/admin/posts/{$post->id}/edit")->assertOk()->assertSee($post->title);
-        $this->actingAs($this->admin, 'admin')->get("/admin/posts/{$post->id}")->assertOk()->assertSee($post->title);
+        $this->actingAs($this->admin, 'admin')
+            ->getJson('/api/v1/admin/posts')
+            ->assertOk()
+            ->assertJsonCount(2, 'data')
+            ->assertJsonPath('meta.status_counts', ['all' => 2, 'published' => 1, 'scheduled' => 0, 'draft' => 1])
+            ->assertJsonFragment(['title' => $draft->title, 'status_label' => 'Draft'])
+            ->assertJsonFragment(['title' => $live->title, 'status_label' => 'Published', 'is_live' => true]);
     }
 
     public function test_the_list_can_be_filtered_to_scheduled_posts(): void
     {
         $scheduled = Post::factory()->scheduled()->create();
-        $live = Post::factory()->published()->create();
+        Post::factory()->published()->create();
 
         $this->actingAs($this->admin, 'admin')
-            ->get('/admin/posts?status=scheduled')
+            ->getJson('/api/v1/admin/posts?status=scheduled')
             ->assertOk()
-            ->assertSee($scheduled->title)
-            ->assertDontSee($live->title);
+            ->assertJsonCount(1, 'data')
+            ->assertJsonPath('data.0.title', $scheduled->title)
+            ->assertJsonPath('data.0.status_label', 'Scheduled');
     }
 
-    public function test_the_list_can_be_filtered_by_category_and_counts_each_status(): void
+    public function test_the_list_can_be_filtered_by_category_and_title(): void
     {
         $security = Category::factory()->create(['name' => 'Security']);
-        $inCategory = Post::factory()->published()->for($security)->create();
-        $elsewhere = Post::factory()->create();
+        $match = Post::factory()->published()->for($security)->create(['title' => 'Border security review']);
+        Post::factory()->for($security)->create(['title' => 'Something else']);
+        Post::factory()->create(['title' => 'Security elsewhere']);
 
         $this->actingAs($this->admin, 'admin')
-            ->get("/admin/posts?category={$security->id}")
+            ->getJson("/api/v1/admin/posts?category={$security->id}&q=security")
             ->assertOk()
-            ->assertSee($inCategory->title)
-            ->assertDontSee($elsewhere->title)
-            ->assertViewHas('statusCounts', ['' => 2, 'published' => 1, 'scheduled' => 0, 'draft' => 1]);
+            ->assertJsonCount(1, 'data')
+            ->assertJsonPath('data.0.id', $match->id);
     }
 
-    public function test_the_edit_screen_shows_who_created_the_post(): void
+    public function test_a_single_post_includes_its_body_and_who_created_it(): void
     {
-        $post = Post::factory()->for($this->admin)->create();
+        $post = Post::factory()->for($this->admin)->create(['body' => '<p>Hello</p>']);
 
         $this->actingAs($this->admin, 'admin')
-            ->get("/admin/posts/{$post->id}/edit")
+            ->getJson("/api/v1/admin/posts/{$post->id}")
             ->assertOk()
-            ->assertSeeInOrder(['Created by', 'Ada Editor']);
+            ->assertJsonPath('data.body', '<p>Hello</p>')
+            ->assertJsonPath('data.created_by', 'Ada Editor');
     }
 
     public function test_an_editor_can_publish_a_post_with_a_cover_image(): void
@@ -82,7 +90,7 @@ class AdminPostTest extends TestCase
         $this->fakeCloudinaryUpload('cagad/blog/covers/new-cover');
         $category = Category::factory()->create();
 
-        $response = $this->actingAs($this->admin, 'admin')->post('/admin/posts', [
+        $response = $this->actingAs($this->admin, 'admin')->postJson('/api/v1/admin/posts', [
             'title' => 'Budget Transparency in Nigerian States',
             'category_id' => $category->id,
             'author_name' => 'Dr. Example',
@@ -93,7 +101,9 @@ class AdminPostTest extends TestCase
         ]);
 
         $post = Post::sole();
-        $response->assertRedirect("/admin/posts/{$post->id}/edit")->assertSessionHasNoErrors();
+        $response->assertCreated()
+            ->assertJsonPath('data.id', $post->id)
+            ->assertJsonPath('message', 'Post created.');
 
         $this->assertSame('budget-transparency-in-nigerian-states', $post->slug);
         $this->assertSame(PostStatus::Published, $post->status);
@@ -109,24 +119,24 @@ class AdminPostTest extends TestCase
     public function test_a_draft_can_be_saved_without_a_body_but_not_published(): void
     {
         $this->actingAs($this->admin, 'admin')
-            ->post('/admin/posts', ['title' => 'Idea', 'status' => 'draft'])
-            ->assertSessionHasNoErrors();
+            ->postJson('/api/v1/admin/posts', ['title' => 'Idea', 'status' => 'draft'])
+            ->assertCreated();
 
         $this->actingAs($this->admin, 'admin')
-            ->post('/admin/posts', ['title' => 'Too soon', 'status' => 'published'])
-            ->assertSessionHasErrors('body');
+            ->postJson('/api/v1/admin/posts', ['title' => 'Too soon', 'status' => 'published'])
+            ->assertJsonValidationErrors(['body' => 'Write the post before publishing it, or save it as a draft.']);
 
         $this->assertSame(['Idea'], Post::pluck('title')->all());
     }
 
     public function test_a_future_publish_date_schedules_the_post(): void
     {
-        $this->actingAs($this->admin, 'admin')->post('/admin/posts', [
+        $this->actingAs($this->admin, 'admin')->postJson('/api/v1/admin/posts', [
             'title' => 'Coming soon',
             'body' => '<p>Later.</p>',
             'status' => 'published',
             'published_at' => now()->addWeek()->format('Y-m-d\TH:i'),
-        ]);
+        ])->assertJsonPath('data.status_label', 'Scheduled');
 
         $post = Post::sole();
         $this->assertTrue($post->isScheduled());
@@ -135,7 +145,7 @@ class AdminPostTest extends TestCase
 
     public function test_post_html_is_sanitised_before_it_is_stored(): void
     {
-        $this->actingAs($this->admin, 'admin')->post('/admin/posts', [
+        $this->actingAs($this->admin, 'admin')->postJson('/api/v1/admin/posts', [
             'title' => 'Sanitised',
             'status' => 'draft',
             'body' => '<p onclick="steal()">Hello</p><script>alert(1)</script><a href="javascript:alert(1)">x</a>'
@@ -156,7 +166,7 @@ class AdminPostTest extends TestCase
     {
         $body = str_repeat('<p>'.str_repeat('word ', 200).'</p>', 50);
 
-        $this->actingAs($this->admin, 'admin')->post('/admin/posts', ['title' => 'Long read', 'status' => 'draft', 'body' => $body]);
+        $this->actingAs($this->admin, 'admin')->postJson('/api/v1/admin/posts', ['title' => 'Long read', 'status' => 'draft', 'body' => $body]);
 
         $this->assertSame(strlen($body), strlen(Post::sole()->body));
         $this->assertSame(50, Post::sole()->readingTime());
@@ -164,8 +174,8 @@ class AdminPostTest extends TestCase
 
     public function test_duplicate_titles_get_unique_slugs(): void
     {
-        $this->actingAs($this->admin, 'admin')->post('/admin/posts', ['title' => 'Quarterly Review', 'status' => 'draft']);
-        $this->actingAs($this->admin, 'admin')->post('/admin/posts', ['title' => 'Quarterly Review', 'status' => 'draft']);
+        $this->actingAs($this->admin, 'admin')->postJson('/api/v1/admin/posts', ['title' => 'Quarterly Review', 'status' => 'draft']);
+        $this->actingAs($this->admin, 'admin')->postJson('/api/v1/admin/posts', ['title' => 'Quarterly Review', 'status' => 'draft']);
 
         $this->assertEqualsCanonicalizing(['quarterly-review', 'quarterly-review-2'], Post::pluck('slug')->all());
     }
@@ -175,27 +185,32 @@ class AdminPostTest extends TestCase
         Post::factory()->create(['slug' => 'taken']);
 
         $this->actingAs($this->admin, 'admin')
-            ->post('/admin/posts', ['title' => 'A', 'slug' => 'Taken', 'status' => 'draft'])
-            ->assertSessionHasErrors('slug');
+            ->postJson('/api/v1/admin/posts', ['title' => 'A', 'slug' => 'Taken', 'status' => 'draft'])
+            ->assertJsonValidationErrors(['slug' => 'Another post already uses this URL slug.']);
 
         $this->actingAs($this->admin, 'admin')
-            ->post('/admin/posts', ['title' => 'B', 'slug' => 'My Custom URL', 'status' => 'draft'])
-            ->assertSessionHasNoErrors();
+            ->postJson('/api/v1/admin/posts', ['title' => 'B', 'slug' => 'My Custom URL', 'status' => 'draft'])
+            ->assertCreated();
 
         $this->assertDatabaseHas('posts', ['title' => 'B', 'slug' => 'my-custom-url']);
     }
 
+    /**
+     * The React admin sends edits as multipart POSTs with _method=PUT, since
+     * PHP only parses uploaded files on POST requests.
+     */
     public function test_replacing_a_cover_deletes_the_old_image_from_cloudinary(): void
     {
         $post = Post::factory()->withCover()->create();
         $oldPublicId = $post->cover_image_public_id;
         $this->fakeCloudinaryUpload('cagad/blog/covers/replacement');
 
-        $this->actingAs($this->admin, 'admin')->put("/admin/posts/{$post->id}", [
+        $this->actingAs($this->admin, 'admin')->postJson("/api/v1/admin/posts/{$post->id}", [
+            '_method' => 'PUT',
             'title' => $post->title,
             'status' => 'draft',
             'cover_image' => UploadedFile::fake()->image('new.jpg'),
-        ])->assertSessionHasNoErrors();
+        ])->assertOk()->assertJsonPath('message', 'Post saved.');
 
         $this->assertSame('cagad/blog/covers/replacement', $post->fresh()->cover_image_public_id);
         Http::assertSent(fn (Request $request): bool => str_ends_with($request->url(), '/image/destroy')
@@ -208,11 +223,11 @@ class AdminPostTest extends TestCase
         $oldPublicId = $post->cover_image_public_id;
         Http::fake(['api.cloudinary.com/*/image/destroy' => Http::response(['result' => 'ok'])]);
 
-        $this->actingAs($this->admin, 'admin')->put("/admin/posts/{$post->id}", [
+        $this->actingAs($this->admin, 'admin')->putJson("/api/v1/admin/posts/{$post->id}", [
             'title' => $post->title,
             'status' => 'draft',
             'remove_cover' => '1',
-        ])->assertSessionHasNoErrors();
+        ])->assertOk()->assertJsonPath('data.cover_image', null);
 
         $this->assertNull($post->fresh()->cover_image_url);
         Http::assertSent(fn (Request $request): bool => $request['public_id'] === $oldPublicId);
@@ -222,28 +237,26 @@ class AdminPostTest extends TestCase
     {
         $post = Post::factory()->withCover()->create();
 
-        $this->actingAs($this->admin, 'admin')->put("/admin/posts/{$post->id}", [
+        $this->actingAs($this->admin, 'admin')->putJson("/api/v1/admin/posts/{$post->id}", [
             'title' => 'Renamed',
             'status' => 'draft',
-        ])->assertSessionHasNoErrors();
+        ])->assertOk();
 
         $this->assertSame($post->cover_image_url, $post->fresh()->cover_image_url);
         Http::assertNothingSent();
     }
 
-    public function test_a_failed_upload_keeps_the_editor_on_the_form(): void
+    public function test_a_failed_upload_is_reported_against_the_cover_and_nothing_is_saved(): void
     {
         Http::fake(['api.cloudinary.com/*' => Http::response(['error' => ['message' => 'Invalid image file']], 400)]);
 
         $this->actingAs($this->admin, 'admin')
-            ->from('/admin/posts/create')
-            ->post('/admin/posts', [
+            ->postJson('/api/v1/admin/posts', [
                 'title' => 'Broken upload',
                 'status' => 'draft',
                 'cover_image' => UploadedFile::fake()->image('cover.jpg'),
             ])
-            ->assertRedirect('/admin/posts/create')
-            ->assertSessionHasErrors(['cover_image' => 'Upload failed: Invalid image file']);
+            ->assertJsonValidationErrors(['cover_image' => 'Upload failed: Invalid image file']);
 
         $this->assertDatabaseCount('posts', 0);
     }
@@ -251,12 +264,12 @@ class AdminPostTest extends TestCase
     public function test_non_images_are_rejected_as_covers(): void
     {
         $this->actingAs($this->admin, 'admin')
-            ->post('/admin/posts', [
+            ->postJson('/api/v1/admin/posts', [
                 'title' => 'PDF cover',
                 'status' => 'draft',
                 'cover_image' => UploadedFile::fake()->create('report.pdf', 100, 'application/pdf'),
             ])
-            ->assertSessionHasErrors('cover_image');
+            ->assertJsonValidationErrors('cover_image');
 
         Http::assertNothingSent();
     }
@@ -267,8 +280,9 @@ class AdminPostTest extends TestCase
         Http::fake(['api.cloudinary.com/*/image/destroy' => Http::response(['result' => 'ok'])]);
 
         $this->actingAs($this->admin, 'admin')
-            ->delete("/admin/posts/{$post->id}")
-            ->assertRedirect('/admin/posts');
+            ->deleteJson("/api/v1/admin/posts/{$post->id}")
+            ->assertOk()
+            ->assertJsonPath('message', "“{$post->title}” was deleted.");
 
         $this->assertModelMissing($post);
         Http::assertSent(fn (Request $request): bool => $request['public_id'] === $post->cover_image_public_id);

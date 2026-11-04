@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Admin;
+use App\Models\AdminToken;
 use App\Services\Cloudinary;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizer;
@@ -46,6 +48,6 @@ class AppServiceProvider extends ServiceProvider
     {
         RateLimiter::for('api', fn (Request $request): Limit => Limit::perMinute(120)->by($request->ip()));
 
-        Paginator::useBootstrapFive();
+        Auth::viaRequest('admin-token', fn (Request $request): ?Admin => AdminToken::findValid($request->bearerToken())?->admin);
     }
 }

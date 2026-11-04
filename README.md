@@ -5,10 +5,10 @@ The public site for the Centre for Advancement of Governance and Development, pl
 ```
 cagad/
 ├── src/, public/, index.html   React + Vite site (deployed to Vercel at cagad.org)
-└── backend/                    Laravel 13 app: blog admin panel + read-only JSON API
+└── backend/                    Laravel 13 app: JSON API for the blog and its admin
 ```
 
-Editors write posts in the Laravel admin panel. The React site reads them from the API and shows them at `/blog`, `/blog/:slug` and in the "Latest Insights" section on the homepage. Every image (cover images and images inside posts) is uploaded to **Cloudinary**; nothing is stored on the server.
+Editors write posts in the blog admin at `/admin`, which is part of this React site (`src/admin`) and saves through the Laravel API. The public pages read them from the API and show them at `/blog`, `/blog/:slug` and in the "Latest Insights" section on the homepage. Every image (cover images and images inside posts) is uploaded to **Cloudinary**; nothing is stored on the server.
 
 ## Run it locally
 
@@ -24,8 +24,6 @@ php artisan cloudinary:check   # confirms the credentials work
 php artisan serve
 ```
 
-Sign in at http://localhost:8000/admin as `admin@cagad.org` with the password `password` (the seeded super admin; change the password under **My account**).
-
 **2. Frontend** (http://localhost:5173)
 
 ```bash
@@ -35,9 +33,11 @@ npm run dev
 
 In development the site talks to `http://localhost:8000` automatically. To point it somewhere else, copy `.env.example` to `.env.local` and set `VITE_API_URL`.
 
+Sign in to the admin at http://localhost:5173/admin as `admin@cagad.org` with the password `password` (the seeded super admin; change the password under **My account**).
+
 ## Deploying
 
-**Frontend (Vercel).** Add an environment variable `VITE_API_URL` with the backend's public address (e.g. `https://api.cagad.org`), then redeploy. `vercel.json` rewrites every path to `index.html` so `/blog/...` URLs work when opened directly or refreshed.
+**Frontend (Vercel).** Add an environment variable `VITE_API_URL` with the backend's public address (e.g. `https://api.cagad.org`), then redeploy. `vercel.json` rewrites every path to `index.html` so `/blog/...` and `/admin/...` URLs work when opened directly or refreshed, and tells search engines not to index `/admin`. The admin is at `https://cagad.org/admin`.
 
 **Backend.** Any PHP 8.3+ host works (Laravel Cloud, Forge, a VPS, or cPanel with the document root set to `backend/public`). See [backend/README.md](backend/README.md) for the environment variables and the post-deploy commands.
 

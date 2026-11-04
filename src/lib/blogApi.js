@@ -1,7 +1,7 @@
 // Client for the CAGAD Laravel backend (see /backend). Set VITE_API_URL to the
 // backend's address, e.g. https://api.cagad.org. In development it defaults to
 // the local `php artisan serve` address.
-const API_URL = (
+export const API_URL = (
   import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:8000' : '')
 ).replace(/\/+$/, '')
 

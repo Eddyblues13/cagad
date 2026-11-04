@@ -25,7 +25,7 @@ class AdminImageUploadTest extends TestCase
         ]);
 
         $this->actingAs(Admin::factory()->create(), 'admin')
-            ->postJson('/admin/uploads/images', ['file' => UploadedFile::fake()->image('chart.png')])
+            ->postJson('/api/v1/admin/uploads/images', ['file' => UploadedFile::fake()->image('chart.png')])
             ->assertOk()
             ->assertExactJson([
                 'location' => 'https://res.cloudinary.com/test-cloud/image/upload/c_limit,w_1600,f_auto,q_auto/v1/cagad/blog/content/chart.png',
@@ -37,7 +37,7 @@ class AdminImageUploadTest extends TestCase
     public function test_only_images_are_accepted(): void
     {
         $this->actingAs(Admin::factory()->create(), 'admin')
-            ->postJson('/admin/uploads/images', ['file' => UploadedFile::fake()->create('notes.txt', 1, 'text/plain')])
+            ->postJson('/api/v1/admin/uploads/images', ['file' => UploadedFile::fake()->create('notes.txt', 1, 'text/plain')])
             ->assertUnprocessable()
             ->assertJsonValidationErrors('file');
 
@@ -49,14 +49,14 @@ class AdminImageUploadTest extends TestCase
         Http::fake(['api.cloudinary.com/*' => Http::response(['error' => ['message' => 'File size too large']], 400)]);
 
         $this->actingAs(Admin::factory()->create(), 'admin')
-            ->postJson('/admin/uploads/images', ['file' => UploadedFile::fake()->image('huge.jpg')])
+            ->postJson('/api/v1/admin/uploads/images', ['file' => UploadedFile::fake()->image('huge.jpg')])
             ->assertStatus(502)
             ->assertJson(['message' => 'File size too large']);
     }
 
     public function test_guests_cannot_upload(): void
     {
-        $this->postJson('/admin/uploads/images', ['file' => UploadedFile::fake()->image('x.jpg')])
+        $this->postJson('/api/v1/admin/uploads/images', ['file' => UploadedFile::fake()->image('x.jpg')])
             ->assertUnauthorized();
     }
 }

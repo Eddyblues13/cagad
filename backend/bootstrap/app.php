@@ -19,8 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => AuthenticateAdmin::class,
             'admin.role' => EnsureAdminHasRole::class,
         ]);
-        $middleware->redirectGuestsTo(fn () => route('admin.login'));
-        $middleware->redirectUsersTo(fn () => route('admin.dashboard'));
         $middleware->throttleApi();
     })
     ->withExceptions(function (Exceptions $exceptions): void {

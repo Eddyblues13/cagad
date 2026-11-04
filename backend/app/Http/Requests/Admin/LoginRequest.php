@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Http\Middleware\AuthenticateAdmin;
 use App\Models\Admin;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -26,11 +25,12 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'remember' => ['nullable', 'boolean'],
         ];
     }
 
     /**
-     * Sign in through the admin guard, locking the email/IP pair out after
+     * Check the email and password, locking the email/IP pair out after
      * repeated failures. Deactivated accounts are turned away.
      *
      * @throws ValidationException
@@ -39,9 +39,9 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $guard = Auth::guard(AuthenticateAdmin::GUARD);
+        $admin = Admin::firstWhere('email', $this->string('email')->value());
 
-        if (! $guard->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (! $admin || ! Hash::check($this->string('password')->value(), $admin->password)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -49,12 +49,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        /** @var Admin $admin */
-        $admin = $guard->user();
-
         if (! $admin->is_active) {
-            $guard->logout();
-
             throw ValidationException::withMessages([
                 'email' => 'This account has been deactivated. Ask a super admin to restore access.',
             ]);

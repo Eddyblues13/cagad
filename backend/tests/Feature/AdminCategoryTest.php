@@ -24,19 +24,27 @@ class AdminCategoryTest extends TestCase
     public function test_categories_can_be_listed_created_and_renamed(): void
     {
         $this->actingAs($this->admin, 'admin')
-            ->post('/admin/categories', ['name' => 'Policy Briefs'])
-            ->assertRedirect('/admin/categories');
+            ->postJson('/api/v1/admin/categories', ['name' => 'Policy Briefs'])
+            ->assertCreated()
+            ->assertJsonPath('message', 'Category created.');
 
         $category = Category::sole();
         $this->assertSame('policy-briefs', $category->slug);
-
-        $this->actingAs($this->admin, 'admin')->get('/admin/categories')->assertOk()->assertSee('Policy Briefs');
-        $this->actingAs($this->admin, 'admin')->get('/admin/categories/create')->assertOk();
-        $this->actingAs($this->admin, 'admin')->get("/admin/categories/{$category->id}/edit")->assertOk();
+        Post::factory()->for($category)->create();
 
         $this->actingAs($this->admin, 'admin')
-            ->put("/admin/categories/{$category->id}", ['name' => 'Briefs', 'slug' => 'briefs'])
-            ->assertSessionHasNoErrors();
+            ->getJson('/api/v1/admin/categories')
+            ->assertOk()
+            ->assertJsonPath('data.0.name', 'Policy Briefs')
+            ->assertJsonPath('data.0.posts_count', 1);
+        $this->actingAs($this->admin, 'admin')
+            ->getJson("/api/v1/admin/categories/{$category->id}")
+            ->assertOk()
+            ->assertJsonPath('data.slug', 'policy-briefs');
+
+        $this->actingAs($this->admin, 'admin')
+            ->putJson("/api/v1/admin/categories/{$category->id}", ['name' => 'Briefs', 'slug' => 'briefs'])
+            ->assertOk();
 
         $this->assertSame('briefs', $category->fresh()->slug);
     }
@@ -46,8 +54,8 @@ class AdminCategoryTest extends TestCase
         Category::factory()->create(['name' => 'Security']);
 
         $this->actingAs($this->admin, 'admin')
-            ->post('/admin/categories', ['name' => 'Security'])
-            ->assertSessionHasErrors('name');
+            ->postJson('/api/v1/admin/categories', ['name' => 'Security'])
+            ->assertJsonValidationErrors('name');
     }
 
     public function test_deleting_a_category_keeps_its_posts(): void
@@ -56,8 +64,8 @@ class AdminCategoryTest extends TestCase
         $post = Post::factory()->for($category)->create();
 
         $this->actingAs($this->admin, 'admin')
-            ->delete("/admin/categories/{$category->id}")
-            ->assertRedirect('/admin/categories');
+            ->deleteJson("/api/v1/admin/categories/{$category->id}")
+            ->assertOk();
 
         $this->assertModelMissing($category);
         $this->assertNull($post->fresh()->category_id);
@@ -65,7 +73,7 @@ class AdminCategoryTest extends TestCase
 
     public function test_guests_cannot_manage_categories(): void
     {
-        $this->post('/admin/categories', ['name' => 'Nope'])->assertRedirect('/admin/login');
+        $this->postJson('/api/v1/admin/categories', ['name' => 'Nope'])->assertUnauthorized();
 
         $this->assertDatabaseCount('categories', 0);
     }

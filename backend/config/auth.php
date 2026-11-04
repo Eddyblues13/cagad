@@ -44,8 +44,10 @@ return [
             'provider' => 'users',
         ],
 
+        // The React admin signs in with bearer tokens (see AdminToken and
+        // AppServiceProvider::boot), not cookies, since it runs on another domain.
         'admin' => [
-            'driver' => 'session',
+            'driver' => 'admin-token',
             'provider' => 'admins',
         ],
     ],
