@@ -65,22 +65,35 @@ class DatabaseSeederTest extends TestCase
         $this->assertFalse(Hash::check('password', Admin::sole()->password));
     }
 
-    public function test_sample_posts_are_only_seeded_locally(): void
+    public function test_sample_posts_are_seeded_into_an_empty_blog_without_the_drafts(): void
     {
-        $this->seed();
-        $this->assertSame(0, Post::count());
-
-        $this->app->detectEnvironment(fn (): string => 'local');
         $this->seed();
 
         $this->assertTrue(Post::published()->exists());
         $this->assertTrue(Post::scheduled()->exists());
-        $this->assertTrue(Post::draft()->exists());
+        $this->assertFalse(Post::draft()->exists());
         $this->assertSame(0, Post::whereNull('admin_id')->count());
         $this->assertSame(0, Post::whereNull('category_id')->count());
+    }
 
+    public function test_locally_the_sample_posts_include_drafts(): void
+    {
+        $this->app->detectEnvironment(fn (): string => 'local');
+
+        $this->seed();
+
+        $this->assertTrue(Post::draft()->exists());
+    }
+
+    public function test_sample_posts_are_not_added_to_a_blog_that_already_has_posts(): void
+    {
+        $this->seed();
+        Post::where('title', 'Five Habits of Effective Public Institutions')->delete();
         $count = Post::count();
+
         $this->seed(PostSeeder::class);
+
         $this->assertSame($count, Post::count());
+        $this->assertFalse(Post::where('title', 'Five Habits of Effective Public Institutions')->exists());
     }
 }

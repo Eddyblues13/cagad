@@ -13,7 +13,7 @@
     @endif
 
     <div class="row g-4">
-        <div class="col-lg-8">
+        <div class="col-lg-7 col-xl-8">
             <div class="admin-card mb-4">
                 <div class="admin-card-body">
                     <div class="mb-3">
@@ -79,7 +79,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-5 col-xl-4">
             <div class="d-grid gap-4">
                 <section class="admin-card" aria-labelledby="publish-title">
                     <div class="admin-card-header">

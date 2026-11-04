@@ -26,13 +26,15 @@ Copy `.env.example` to `.env` (`composer setup` does this for you) and fill in:
 ## Commands
 
 ```bash
-php artisan db:seed           # default super admin and categories, plus sample posts locally (safe to re-run)
+php artisan db:seed           # default super admin, categories and sample posts (safe to re-run)
 php artisan admin:create      # create a super admin, or reset any admin's password
 php artisan cloudinary:check  # verify the Cloudinary credentials
 php artisan test              # run the tests (they never call the real Cloudinary)
 ```
 
-Locally, `db:seed` gives you the login `admin@cagad.org` / `password`. Sample posts are only seeded when `APP_ENV=local`, so they can't reach the live blog.
+Locally, `db:seed` gives you the login `admin@cagad.org` / `password`.
+
+`db:seed` also adds ten sample posts: eight published and two scheduled a few days ahead, which go live on their own. They are only added while the blog has no posts at all, so re-seeding never brings back a sample you deleted or mixes samples in with real articles. Locally you also get two unfinished drafts for trying out the admin panel.
 
 ## Admin accounts
 
@@ -79,7 +81,7 @@ Each post includes `cover_image` with ready-made Cloudinary renditions (`thumbna
    composer install --no-dev --optimize-autoloader
    php artisan key:generate        # first deploy only
    php artisan migrate --force
-   php artisan db:seed --force     # first deploy only: super admin and default categories
+   php artisan db:seed --force     # first deploy only: super admin, default categories and sample posts
    php artisan optimize
    php artisan cloudinary:check
    ```

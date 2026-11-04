@@ -19,8 +19,8 @@
                         <th scope="col">Admin</th>
                         <th scope="col" class="d-none d-md-table-cell">Role</th>
                         <th scope="col" class="d-none d-sm-table-cell">Status</th>
-                        <th scope="col" class="d-none d-lg-table-cell">Last sign-in</th>
-                        <th scope="col" class="d-none d-lg-table-cell text-end">Posts</th>
+                        <th scope="col" class="d-none d-xl-table-cell">Last sign-in</th>
+                        <th scope="col" class="d-none d-xl-table-cell text-end">Posts</th>
                         <th scope="col" class="text-end"><span class="visually-hidden">Actions</span></th>
                     </tr>
                 </thead>
@@ -63,8 +63,8 @@
                                     <span class="pill pill-red"><i class="fa-solid fa-ban" aria-hidden="true"></i> Deactivated</span>
                                 @endif
                             </td>
-                            <td class="d-none d-lg-table-cell table-sub text-nowrap">{{ $account->last_login_at?->diffForHumans() ?? 'Never' }}</td>
-                            <td class="d-none d-lg-table-cell text-end"><span class="count-pill">{{ $account->posts_count }}</span></td>
+                            <td class="d-none d-xl-table-cell table-sub text-nowrap">{{ $account->last_login_at?->diffForHumans() ?? 'Never' }}</td>
+                            <td class="d-none d-xl-table-cell text-end"><span class="count-pill">{{ $account->posts_count }}</span></td>
                             <td class="text-end">
                                 @if ($isYou)
                                     <a href="{{ route('admin.account.edit') }}" class="btn btn-sm btn-outline-secondary">My account</a>

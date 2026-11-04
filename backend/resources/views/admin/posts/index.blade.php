@@ -76,7 +76,7 @@
                             <th scope="col" class="d-none d-lg-table-cell">Category</th>
                             <th scope="col" class="d-none d-md-table-cell">Status</th>
                             <th scope="col" class="d-none d-xl-table-cell">Publish date</th>
-                            <th scope="col" class="d-none d-lg-table-cell">Updated</th>
+                            <th scope="col" class="d-none d-xl-table-cell">Updated</th>
                             <th scope="col" class="text-end"><span class="visually-hidden">Actions</span></th>
                         </tr>
                     </thead>
@@ -103,7 +103,7 @@
                                 <td class="d-none d-lg-table-cell">{{ $post->category?->name ?? '—' }}</td>
                                 <td class="d-none d-md-table-cell"><x-admin.status-badge :post="$post" /></td>
                                 <td class="d-none d-xl-table-cell table-sub text-nowrap">{{ $post->published_at?->format('j M Y, H:i') ?? '—' }}</td>
-                                <td class="d-none d-lg-table-cell table-sub text-nowrap">{{ $post->updated_at->diffForHumans() }}</td>
+                                <td class="d-none d-xl-table-cell table-sub text-nowrap">{{ $post->updated_at->diffForHumans() }}</td>
                                 <td class="text-end">
                                     <div class="row-actions">
                                         <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-sm btn-outline-secondary d-none d-sm-inline-flex">Edit</a>

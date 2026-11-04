@@ -209,26 +209,38 @@ class PostSeeder extends Seeder
     ];
 
     /**
-     * Sample posts for local development, so the admin panel and the React blog
-     * have something to show. DatabaseSeeder only runs this locally, and posts
-     * that already exist (matched by title) are skipped.
+     * Starter posts, so a new blog and its admin panel have something to show.
+     *
+     * They are only added to a blog with no posts at all, so re-running the
+     * seeder never brings back a sample that was deleted or mixes samples in
+     * with real articles. The two unfinished drafts are only added locally.
      */
     public function run(): void
     {
+        $output = $this->command?->outputComponents();
+
+        if (Post::exists()) {
+            $output?->info('The blog already has posts, so no sample posts were added.');
+
+            return;
+        }
+
         $admin = Admin::where('role', AdminRole::SuperAdmin)->oldest('id')->first();
         $categoryIds = Category::pluck('id', 'name');
+        $includeDrafts = app()->isLocal();
+        $added = 0;
 
         foreach (self::POSTS as $index => $sample) {
-            $post = Post::firstOrNew(['title' => $sample['title']]);
-
-            if ($post->exists) {
+            if ($sample['days'] === null && ! $includeDrafts) {
                 continue;
             }
 
             $publishedAt = $sample['days'] === null ? null : now()->addDays($sample['days'])->setTime(9, 0);
             $writtenAt = $publishedAt?->isPast() ? $publishedAt : now()->subHours(5 * ($index + 1));
 
+            $post = new Post;
             $post->fill([
+                'title' => $sample['title'],
                 'category_id' => $categoryIds->get($sample['category']),
                 'excerpt' => $sample['excerpt'],
                 'body' => $sample['body'],
@@ -240,6 +252,9 @@ class PostSeeder extends Seeder
             $post->created_at = $writtenAt;
             $post->updated_at = $writtenAt;
             $post->save();
+            $added++;
         }
+
+        $output?->info("Added {$added} sample posts. Edit or delete them in the admin panel.");
     }
 }
