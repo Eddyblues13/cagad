@@ -19,7 +19,7 @@ Copy `.env.example` to `.env` (`composer setup` does this for you) and fill in:
 | `CORS_ALLOWED_ORIGINS` | Comma-separated origins allowed to call the API. `*` is fine since the API is public and read-only |
 | `APP_TIMEZONE` | Defaults to `Africa/Lagos`; publish dates in the admin are entered in this zone |
 | `ADMIN_NAME`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` | The super admin that `db:seed` creates. Defaults to `CAGAD Admin` and `admin@cagad.org`. With no password set it uses `password` locally, and anywhere else a random one that is printed once |
-| `DB_*` | SQLite works locally; use MySQL or PostgreSQL in production |
+| `DB_*` | MySQL. Locally the `cagad` database on XAMPP (user `root`, no password); on the server, the database and user created in the host's control panel |
 
 `.env` is gitignored. Never commit the Cloudinary secret.
 
